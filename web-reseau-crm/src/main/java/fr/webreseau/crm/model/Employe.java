@@ -10,25 +10,30 @@ import javax.persistence.Table;
 public class Employe extends Person{
 	
 
-	private String statue;
+	private String fonction;
 
 	public Employe(Long iD, String name, String firstName, String mail, String password, String phone, String address,
-			String city, String country, String statue) {
+			String city, String country, String fonction) {
 		super(iD, name, firstName, mail, password, phone, address, city, country);
-		this.statue = statue;
+		this.fonction = fonction;
 	}
 
 
 	public Employe() {}
 
 
-	@Column(name="StatueEmploye")
-	public String getStatue() {
-		return statue;
+	@Column(name="FonctionEmploye")
+	public String getFonction() {
+		return fonction;
 	}
 
-	public void setStatue(String statue) {
-		this.statue = statue;
+	public void setFonction(String fonction) {
+		this.fonction = fonction;
+	}
+	
+	@Override
+	public String toString() {
+		return "Employe [fonction=" + fonction + "]";
 	}
 
 }

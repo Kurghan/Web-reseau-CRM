@@ -5,8 +5,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>EmployeList</title>
-<link rel="stylesheet" href="../../static/css/Table-with-search.css" />
-<link rel="stylesheet" href="../../static/css/Table-with-search1.css" />
 </head>
 
 <body>
@@ -15,19 +13,19 @@
 		<div class="intro">
 			<h2 id="title">Employes</h2>
 			<div id="addTitle" role="presentation"><a href="addEmploye">Add</a></div>
-			<div class="form-group pull-right">
+			<div class="form-group">
 				<input type="text" class="search form-control"
 					placeholder="What you looking for?" />
 			</div>
 			<span class="counter pull-right"></span>
-			<form action="#" th:action="@{/deleteEmploye}" th:object="${employe}" method="post">
+			<form action="#" th:action="@{/viewEmploye}" th:object="${employe}" method="post">
 			<table class="table table-hover table-bordered results" id="employeTable">
 				<thead>
 					<tr>
 						<th class="col-md-1 col-xs-1" id="IDEmploye">ID</th>
 						<th class="col-md-1 col-xs-1">Name</th>
 						<th class="col-md-1 col-xs-1">Firstname</th>
-						<th class="col-md-1 col-xs-1">Statue</th>
+						<th class="col-md-1 col-xs-1">Fonction</th>
 						<th class="col-md-2 col-xs-2">Address</th>
 						<th class="col-md-1 col-xs-1">city</th>
 						<th class="col-md-1 col-xs-1">Country</th>
@@ -44,13 +42,13 @@
 						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.ID}" id="IDEmploye"></th>
 						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.name}"></th>
 						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.firstName}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.statue}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.fonction}"></th>
 						<th class="col-md-2 col-xs-2 tableInfo"	th:text="${employe.address}"></th>
 						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.city}"></th>
 						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.country}"></th>
 						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.phone}"></th>
 						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.mail}" id="mail"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"><button type="submit" th:value="${employe.ID}" name="ID" class="buttonDelete">Delete</button><button type="button" class="buttonModify">Modify</button></th>
+						<th class="col-md-1 col-xs-1 tableInfo"><button type="submit" th:value="${employe.ID}" name="ID" class="button">View</button></th>
 					</tr>
 				</tbody>
 			</table>
