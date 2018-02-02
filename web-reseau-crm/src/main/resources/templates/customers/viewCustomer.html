@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>view Customer</title>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+		<h2 id="title" th:object="${customer}"><span  th:text="${customer.name}"></span>  <span th:text="${customer.FirstName}"></span></h2>
+    	<form action="#" th:action="@{/editCustomer}" th:object="${customer}" method="post">
+        <table class="table table-hover table-bordered results">
+				<thead>
+					<tr>
+						<th class="col-md-1 col-xs-1" id="IDCustomer">ID</th>
+						<th class="col-md-1 col-xs-1">Name</th>
+						<th class="col-md-1 col-xs-1">Firstname</th>
+						<th class="col-md-1 col-xs-1">Company Name</th>
+						<th class="col-md-2 col-xs-2">Address</th>
+						<th class="col-md-1 col-xs-1">city</th>
+						<th class="col-md-1 col-xs-1">Country</th>
+						<th class="col-md-1 col-xs-1">Téléphone</th>
+						<th class="col-md-1 col-xs-1">Mail</th>
+						<th class="col-md-1 col-xs-1">n°Siret</th>
+					</tr>
+				</thead>
+				<tbody th:object="${customer}">
+					<tr>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.ID}" id="IDCustomer"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.name}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.firstName}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.companyName}"></th>
+						<th class="col-md-2 col-xs-2 tableInfo"	th:text="${customer.address}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.city}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.country}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.phone}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.mail}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.nSiret}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"><input type="image" src="img/stylo2.png" style="width: 20px;" th:value="${customer.ID}" name="ID" class="button"/></th>
+					</tr>
+				</tbody>
+			</table>
+  	</form>
+    <div class="table-responsive" style="margin:0%;">
+        <table class="table table-hover table-bordered results">
+				<thead>
+					<tr>
+						<th class="col-md-1 col-xs-1" id="IDCustomer">ID</th>
+						<th class="col-md-1 col-xs-1">Name</th>
+						<th class="col-md-1 col-xs-1">Firstname</th>
+						<th class="col-md-1 col-xs-1">Company Name</th>
+						<th class="col-md-2 col-xs-2">Address</th>
+						<th class="col-md-1 col-xs-1">city</th>
+						<th class="col-md-1 col-xs-1">Country</th>
+						<th class="col-md-1 col-xs-1">Téléphone</th>
+						<th class="col-md-1 col-xs-1">Mail</th>
+						<th class="col-md-1 col-xs-1">n°Siret</th>
+					</tr>
+				</thead>
+				<tbody th:object="${customer}">
+					<tr>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.ID}" id="IDCustomer"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.name}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.firstName}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.companyName}"></th>
+						<th class="col-md-2 col-xs-2 tableInfo"	th:text="${customer.address}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.city}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.country}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.phone}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.mail}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.nSiret}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"><input type="image" src="img/stylo2.png" style="width: 20px;" th:value="${customer.ID}" name="ID" class="button"/></th>
+					</tr>
+				</tbody>
+			</table>
+    </div>
+   	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/PHP-Contact-Form-dark.js"></script>
+	<script src="js/PHP-Contact-Form-dark1.js"></script>
+	<script src="js/Table-with-search.js"></script>
+	<script src="js/customers.js"></script> 
+</body>
+
+</html>
