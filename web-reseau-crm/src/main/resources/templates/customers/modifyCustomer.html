@@ -8,7 +8,7 @@
     <div id="contact">
         <div class="container">
             <div class="intro">
-                <h2>New customers</h2>
+                <h2>Edit customers</h2>
                 
             </div>
             <form action="#" th:action="@{/customerModify}" th:object="${customer}" method="post" id="contact-form">
@@ -16,11 +16,11 @@
                 <div class="controls">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group"><label class="control-label" >Name</label><input class="form-control" type="text" name="name" required="" placeholder="" id="" th:value ="${customer.name}" readonly="readonly"/>
+                            <div class="form-group"><label class="control-label" >Name</label><input class="form-control" type="text" name="name" required="" placeholder="" id="" th:value ="${customer.name}"/>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group"><label class="control-label">FirstName </label><input class="form-control" type="text" name="firstName" required="" placeholder="" id="" th:value ="${customer.firstName}" readonly="readonly"/>
+                        <div class="form-group"><label class="control-label">FirstName </label><input class="form-control" type="text" name="firstName" required="" placeholder="" id="" th:value ="${customer.firstName}"/>
                     </div>
                 </div>
         </div>
@@ -71,7 +71,7 @@
         </div>
     </div>
     </div>
-    <button class="btnAdd" type="submit">modify</button>
+    <button class="btnAdd" type="submit" th:value="${customer.ID}" name="ID">modify</button>
     </form>
     </div>
     </div>

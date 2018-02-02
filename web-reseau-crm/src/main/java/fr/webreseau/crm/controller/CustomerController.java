@@ -16,56 +16,67 @@ import fr.webreseau.crm.service.IServiceCustomer;
 
 @Controller
 public class CustomerController {
-	
+
 	@Autowired
 	private IServiceCustomer service;
-	
+
+	/* affiche la page d'accueil */
 	@GetMapping("/")
 	public String pageWelcome() {
 		return "welcome";
-		
+
 	}
-	
+
 	@GetMapping("/addCustomer")
 	public String pageAddCustomer() {
 		return "customers/addCustomer";
-		
+
 	}
-	
+
+	@RequestMapping("/viewCustomer")
+	public String pageViewCustomer(@RequestParam(value = "ID") Long ID, Model model) {
+		ArrayList<Customer> listCustomers = service.readCustomers();
+		for (Customer c : listCustomers) {
+			if (ID == c.getID()) {
+				model.addAttribute("customer", c);
+			}
+		}
+		return "customers/viewCustomer";
+
+	}
+
 	@GetMapping("/customers")
 	public String pageCustomer(Model model) {
 		ArrayList<Customer> listCustomers = service.readCustomers();
-		model.addAttribute("listCustomers",listCustomers);
-		//System.out.println(listCustomers);
+		model.addAttribute("listCustomers", listCustomers);
 		return "customers/customers";
-		
+
 	}
-	
-		@PostMapping("/customerAdd")
-		public String customerAdd(@Valid Customer customer) {
+
+	/* Ajout d'un Customer */
+	@PostMapping("/customerAdd")
+	public String customerAdd(@Valid Customer customer) {
 		service.creatCustomer(customer);
-		//System.out.println(customer);
-			
-			return "redirect:/customers";
+
+		return "redirect:/customers";
 	}
-		
-		@RequestMapping("/editCustomer")
-		public String editCustomer(@RequestParam (value="ID") Long ID,Model model) {
-			//System.out.println(ID);
-			ArrayList<Customer> listCustomers = service.readCustomers();
-			//Customer CustomerToEdit = null;
-			for(Customer c : listCustomers) {
-				if(ID==c.getID()) {
-					model.addAttribute(c);
-				};
+
+	@RequestMapping("/editCustomer")
+	public String editCustomer(@RequestParam(value = "ID") Long ID, Model model) {
+		ArrayList<Customer> listCustomers = service.readCustomers();
+		for (Customer c : listCustomers) {
+			if (ID == c.getID()) {
+				model.addAttribute(c);
 			}
-			
-			
-			return "customers/modifyCustomer";
-			
 		}
+		return "customers/modifyCustomer";
 
-		
+	}
 
+	@RequestMapping("/customerModify")
+	public String modifyCustomer(@Valid Customer customer) {
+		service.modifyCustomer(customer);
+		return "customers/viewCustomer";
+	}
 
 }

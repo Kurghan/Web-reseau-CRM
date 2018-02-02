@@ -27,7 +27,7 @@ public class ServiceCustomer implements IServiceCustomer{
 
 	@Override
 	public void modifyCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+		dao.save(customer);
 		
 	}
 
