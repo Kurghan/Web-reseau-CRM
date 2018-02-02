@@ -1,0 +1,12 @@
+package fr.webreseau.crm;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class WebReseauCrmApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(WebReseauCrmApplication.class, args);
+	}
+}

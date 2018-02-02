@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+    <div id="contact">
+        <div class="container">
+            <div class="intro">
+                <h2>New customers</h2>
+                
+            </div>
+            <form action="#" th:action="@{/employeAdd}" th:object="${employe}" method="post" id="contact-form">
+                <div class="messages"></div>
+                <div class="controls">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group"><label class="control-label">Name </label><input class="form-control" type="text" name="name" required="" placeholder="" id="" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"><label class="control-label">FirstName </label><input class="form-control" type="text" name="firstName" required="" placeholder="" id=""/>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="controls">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"><label class="control-label" >Statue</label><input class="form-control" type="text" name="statue" required="" placeholder="" id=""/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group"><label class="control-label" >address </label><input class="form-control" type="text" name="address" required="" placeholder="" id=""/>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="controls">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"><label class="control-label">city </label><input class="form-control" type="text" name="city" required="" placeholder="" id=""/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"><label class="control-label">Country </label><input class="form-control" type="text" name="country" required="" placeholder="" id=""/>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="controls">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"><label class="control-label" >Telephone </label><input class="form-control" type="text" name="phone" required="" placeholder="" id=""/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"><label class="control-label">mail </label><input class="form-control" type="text" name="mail" required="" placeholder="" id=""/>
+            </div>
+        </div>
+    </div>
+    </div>
+    <button class="btnAdd" type="submit">add</button>
+    </form>
+    </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

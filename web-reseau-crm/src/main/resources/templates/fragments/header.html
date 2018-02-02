@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Web-reseau</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"/>
+    <link rel="stylesheet" href="css/Pretty-Header.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="css/Table-with-search.css"/>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default custom-header" th:fragment="header">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand" href="/"> </a><button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
+            <div
+                class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav links">
+                    <li role="presentation"><a href="customers">Customers </a></li>
+                    <li role="presentation"><a href="employe">Employe </a></li>
+                    <li role="presentation"><a href="welcome">Home </a></li>
+                    <li role="presentation"><a href="welcome">Files </a></li>
+                    <li role="presentation"><a href="welcome">Mail </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right"></ul>
+        </div>
+        </div>
+    </nav>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

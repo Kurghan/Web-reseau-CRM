@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CustomerList</title>
+<link rel="stylesheet" href="../../static/css/Table-with-search.css" />
+<link rel="stylesheet" href="../../static/css/Table-with-search1.css" />
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="intro">
+			<h2 id="title">Customers</h2>
+			<div id="addTitle" role="presentation"><a href="addCustomer">Add</a></div>
+			<div class="form-group pull-right">
+				<input type="text" class="search form-control"
+					placeholder="What you looking for?" />
+			</div>
+			<span class="counter pull-right"></span>
+			<form action="#" th:action="@{/editCustomer}" th:object="${customer}" method="post">
+			<table class="table table-hover table-bordered results" id="customerTable">
+				<thead>
+					<tr>
+						<th class="col-md-1 col-xs-1" id="IDCustomer">ID</th>
+						<th class="col-md-1 col-xs-1">Name</th>
+						<th class="col-md-1 col-xs-1">Firstname</th>
+						<th class="col-md-1 col-xs-1">Company Name</th>
+						<th class="col-md-2 col-xs-2">Address</th>
+						<th class="col-md-1 col-xs-1">city</th>
+						<th class="col-md-1 col-xs-1">Country</th>
+						<th class="col-md-1 col-xs-1">Téléphone</th>
+						<th class="col-md-1 col-xs-1">Mail</th>
+					</tr>
+					<tr class="warning no-result">
+						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+					</tr>
+				</thead>
+				<tbody th:each="customer : ${listCustomers}">
+					<tr>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.ID}" id="IDCustomer"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.name}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.firstName}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.companyName}"></th>
+						<th class="col-md-2 col-xs-2 tableInfo"	th:text="${customer.address}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.city}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.country}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.phone}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.mail}" id="mail"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"><button type="submit" th:value="${customer.ID}" name="ID" class="buttonDelete">Edit</button></th>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/PHP-Contact-Form-dark.js"></script>
+	<script src="js/PHP-Contact-Form-dark1.js"></script>
+	<script src="js/Table-with-search.js"></script>
+	<script src="js/customers.js"></script>
+</body>
+
+</html>
