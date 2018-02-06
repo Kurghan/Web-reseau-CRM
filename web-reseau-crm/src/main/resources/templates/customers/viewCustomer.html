@@ -11,6 +11,7 @@
 	<div th:replace="fragments/header :: header"></div>
 		<h2 id="title" th:object="${customer}"><span  th:text="${customer.name}"></span>  <span th:text="${customer.firstName}"></span></h2>
     	<form action="#" th:action="@{/editCustomer}" th:object="${customer}" method="post">
+    	<div id="addTitle" role="presentation"><a th:href="@{/addProject(id=${customer.ID})}" th:value="${customer.ID}">Add project</a></div>
         <table class="table table-hover table-bordered results">
 				<thead>
 					<tr>
