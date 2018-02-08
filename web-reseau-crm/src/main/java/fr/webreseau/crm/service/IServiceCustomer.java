@@ -7,6 +7,8 @@ public interface IServiceCustomer {
 
 	public ArrayList<Customer> readCustomers();
 	
+	public Customer readOneCustomer(Long ID);
+	
 	public void creatCustomer(Customer customer);
 	
 	public void modifyCustomer(Customer customer);

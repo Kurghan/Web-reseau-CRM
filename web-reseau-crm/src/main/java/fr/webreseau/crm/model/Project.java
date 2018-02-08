@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name="project")
@@ -17,9 +19,11 @@ public class Project {
 	private Long ID;
 	private String name;
 	private String description;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date deadLine;
-	
+	private Long IDCustomer;
 	
 	public Project(Long iD, String name, String description, Date startDate,
 			Date deadLine) {
@@ -76,12 +80,20 @@ public class Project {
 		this.deadLine = deadLine;
 	}
 	
-	
+	public Long getIDCustomer() {
+		return IDCustomer;
+	}
+
+	public void setIDCustomer(Long iDCustomer) {
+		IDCustomer = iDCustomer;
+	}
+
 	@Override
 	public String toString() {
-		return "Project [ID=" + ID + ", name=" + name + ", description=" + description
-				+ ", startDate=" + startDate + ", deadLine=" + deadLine + "]";
+		return "Project [ID=" + ID + ", name=" + name + ", description=" + description + ", startDate=" + startDate
+				+ ", deadLine=" + deadLine + ", IDCustomer=" + IDCustomer + "]";
 	}
+
 	
 	
 }

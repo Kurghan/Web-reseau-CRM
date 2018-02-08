@@ -22,7 +22,7 @@ public class ServiceProject implements IServiceProject {
 
 	@Override
 	public void creatProject(Project project) {
-		// TODO Auto-generated method stub
+		dao.save(project);
 		
 	}
 

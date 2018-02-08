@@ -118,3 +118,14 @@ body {
 	padding-left: 20px;
 	padding-right: 20px;
 }
+
+#projectName #startDate{
+	margin-left: 100px;
+}
+
+.customerNameProject{
+	margin-top: 50px;
+	margin-bottom: 50px;
+	font-size: 25px;
+	
+}

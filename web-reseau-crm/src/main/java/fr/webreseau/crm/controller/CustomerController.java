@@ -79,4 +79,18 @@ public class CustomerController {
 		return "customers/viewCustomer";
 	}
 
+	
+	//recuperation de l'id du client pour creer un projet lié au client
+	@GetMapping("/addProject{id}")
+	public String addProjectCustomer(@RequestParam("id") Long ID, Model model) {
+		ArrayList<Customer> listCustomers = service.readCustomers();
+		for (Customer c : listCustomers) {
+			if (ID == c.getID()) {
+				model.addAttribute("customer",c);
+				System.out.println(c);
+			}
+		}
+		return "projects/addProject";
+	}
+
 }

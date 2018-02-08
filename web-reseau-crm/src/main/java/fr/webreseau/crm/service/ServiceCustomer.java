@@ -37,5 +37,11 @@ public class ServiceCustomer implements IServiceCustomer{
 		
 	}
 
+	@Override
+	public Customer readOneCustomer(Long ID) {
+		return dao.findOne(ID);
+		
+	}
+
 
 }
