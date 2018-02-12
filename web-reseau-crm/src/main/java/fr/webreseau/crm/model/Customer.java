@@ -14,9 +14,8 @@ public class Customer extends Person {
 	private String companyName;
 
 
-	
 	public Customer(Long iD, String name, String firstName, String mail, String password, String phone, String address,
-			String city, String country, String nSiret, String companyName) {
+			String city, String country, String nSiret, String companyName, Project project) {
 		super(iD, name, firstName, mail, password, phone, address, city, country);
 		this.nSiret = nSiret;
 		this.companyName = companyName;
@@ -34,7 +33,7 @@ public class Customer extends Person {
 		this.nSiret = nSiret;
 	}
 
-	@Column(name="CompanyName")
+	@Column(name="CompanyNameCustomer")
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -45,9 +44,8 @@ public class Customer extends Person {
 
 	@Override
 	public String toString() {
-		return "N°Siret=" + nSiret + ", companyName=" + companyName + ", Name= " + super.getName() + ", FirstName= " + super.getFirstName() + ", Address= " + super.getAddress() + ", City= " + super.getCity() + ", Country= " + super.getCountry() + ", Phone= " + super.getPhone() + ", Mail= " + super.getMail();
+		return "Customer [nSiret=" + nSiret + ", companyName=" + companyName + "]";
 	}
-	
 
 	
 }

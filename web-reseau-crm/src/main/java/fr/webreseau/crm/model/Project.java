@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -23,19 +24,20 @@ public class Project {
 	private Date startDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date deadLine;
-	private Long IDCustomer;
+	private Customer customer;
 	
-	public Project(Long iD, String name, String description, Date startDate,
-			Date deadLine) {
+
+	
+	public Project(Long iD, String name, String description, Date startDate, Date deadLine, Customer customer) {
 		super();
 		ID = iD;
 		this.name = name;
 		this.description = description;
 		this.startDate = startDate;
 		this.deadLine = deadLine;
-		
+		this.customer = customer;
 	}
-	
+
 	public Project() {}
 	
 	@Id
@@ -79,20 +81,23 @@ public class Project {
 	public void setDeadLine(Date deadLine) {
 		this.deadLine = deadLine;
 	}
-	
-	public Long getIDCustomer() {
-		return IDCustomer;
+
+	@ManyToOne
+    @JoinColumn(name="IDPerson")
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setIDCustomer(Long iDCustomer) {
-		IDCustomer = iDCustomer;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Override
 	public String toString() {
 		return "Project [ID=" + ID + ", name=" + name + ", description=" + description + ", startDate=" + startDate
-				+ ", deadLine=" + deadLine + ", IDCustomer=" + IDCustomer + "]";
+				+ ", deadLine=" + deadLine + ", customer=" + customer + "]";
 	}
+
 
 	
 	

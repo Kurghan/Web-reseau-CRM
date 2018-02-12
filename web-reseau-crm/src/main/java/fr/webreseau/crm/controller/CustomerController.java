@@ -12,14 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.webreseau.crm.model.Customer;
+import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.service.IServiceCustomer;
+import fr.webreseau.crm.service.IServiceProject;
 
 @Controller
 public class CustomerController {
 
 	@Autowired
 	private IServiceCustomer service;
-
+	
+	@Autowired
+	private IServiceProject serviceProject;
+	
 	/* affiche la page d'accueil */
 	@GetMapping("/")
 	public String pageWelcome() {
@@ -36,19 +41,29 @@ public class CustomerController {
 	@RequestMapping("/viewCustomer")
 	public String pageViewCustomer(@RequestParam(value = "ID") Long ID, Model model) {
 		ArrayList<Customer> listCustomers = service.readCustomers();
+		ArrayList<Project> listProject = serviceProject.readProject();
+		ArrayList<Project> listCustomerProjects = new ArrayList<Project>() ;
 		for (Customer c : listCustomers) {
 			if (ID == c.getID()) {
 				model.addAttribute("customer", c);
+				}
+		}
+		for(Project p : listProject) {
+			if(p.getCustomer().getID()==ID) {
+				listCustomerProjects.add(p);
+				model.addAttribute("listCustomerProjects", listCustomerProjects);
+				System.out.println(listCustomerProjects);
+
 			}
 		}
 		return "customers/viewCustomer";
-
 	}
 
 	@GetMapping("/customers")
 	public String pageCustomer(Model model) {
 		ArrayList<Customer> listCustomers = service.readCustomers();
 		model.addAttribute("listCustomers", listCustomers);
+		//System.out.println(listCustomers);
 		return "customers/customers";
 
 	}

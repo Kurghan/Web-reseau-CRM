@@ -18,7 +18,7 @@
 						<th class="col-md-1 col-xs-1" id="IDCustomer">ID</th>
 						<th class="col-md-1 col-xs-1">Name</th>
 						<th class="col-md-1 col-xs-1">Firstname</th>
-						<th class="col-md-1 col-xs-1">Company Name</th>
+						<th class="col-md-2 col-xs-2">Company Name</th>
 						<th class="col-md-2 col-xs-2">Address</th>
 						<th class="col-md-1 col-xs-1">city</th>
 						<th class="col-md-1 col-xs-1">Country</th>
@@ -44,35 +44,25 @@
 				</tbody>
 			</table>
   	</form>
-    <div class="table-responsive" style="margin:0%;">
-        <table class="table table-hover table-bordered results">
+    <div class="table-responsive" style="margin:7%;">
+        <table class="table table-hover table-bordered results" id="ProjectsTableTable" >
 				<thead>
 					<tr>
-						<th class="col-md-1 col-xs-1" id="IDCustomer">ID</th>
-						<th class="col-md-1 col-xs-1">Name</th>
-						<th class="col-md-1 col-xs-1">Firstname</th>
-						<th class="col-md-1 col-xs-1">Company Name</th>
-						<th class="col-md-2 col-xs-2">Address</th>
-						<th class="col-md-1 col-xs-1">city</th>
-						<th class="col-md-1 col-xs-1">Country</th>
-						<th class="col-md-1 col-xs-1">Téléphone</th>
-						<th class="col-md-1 col-xs-1">Mail</th>
-						<th class="col-md-1 col-xs-1">n°Siret</th>
+						<th class="col-md-2 col-xs-2">Project Name </th>
+						<th class="col-md-3 col-xs-3">Description</th>
+						<th class="col-md-1 col-xs-1">Start date</th>
+						<th class="col-md-1 col-xs-1">End date</th>
+					</tr>
+					<tr class="warning no-result">
 					</tr>
 				</thead>
-				<tbody th:object="${customer}">
+				<tbody th:each="project: ${listCustomerProjects}">
 					<tr>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.ID}" id="IDCustomer"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.name}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.firstName}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.companyName}"></th>
-						<th class="col-md-2 col-xs-2 tableInfo"	th:text="${customer.address}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.city}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.country}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${customer.phone}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.mail}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${customer.nSiret}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"><input type="image" src="img/stylo2.png" style="width: 20px;" th:value="${customer.ID}" name="ID" class="button"/></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${project.name}"></th>
+						<th class="col-md-3 col-xs-8 tableInfo" th:text="${#strings.abbreviate(project.description,50)}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"><button type="submit" th:value="${project.ID}" name="ID" class="button">View</button></th>
 					</tr>
 				</tbody>
 			</table>
