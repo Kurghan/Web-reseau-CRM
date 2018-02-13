@@ -37,7 +37,7 @@ public class EmployeController {
 	@PostMapping("/employeAdd")
 	public String employeAdd(@Valid Employe employe) {
 	service.creatEmploye(employe);
-	System.out.println(employe);
+	//System.out.println(employe);
 		
 		return "redirect:/employes";
 }

@@ -5,33 +5,116 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>View project</title>
+
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	<h2 id="title" th:object="${project}">
-		<span th:text="${project.name}"></span>
-	</h2>
-<div class="col-md-12 col-lg-6" >
-    <div th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}" class="pull-left" style="margin-right: 2px;"></div>
-    <div th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}" class="pull-right" style="margin-left: 2px;"></div>
-    <div class="progress beautiful" style="margin-left: 2%;">
-        <div class="progress-bar progress-bar-striped active" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
-    </div>
-</div>
-<div class="col-md-12">
-</div>
-	<div class="highlight-phone">
+	<form action="#" th:action="@{/editProject}">
+		<h2 id="titleProject" th:object="${project}">
+			<span th:text="${project.name}"></span>
+			<input type="image" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="${project.ID}" name="ID" class="submit" />
+		</h2>
+		<h3 id="titleCustomerProject">
+			<span
+				th:text="${project.customer.name} +' , '+ ${project.customer.firstName}"></span>
+		</h3>
+	</form>
+	<div class="col-md-12 col-lg-6">
+		<div th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}" class="pull-left" style="margin-right: 2px;"></div>
+		<div th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}" class="pull-right" style="margin-left: 2px;"></div>
+		<div class="progress beautiful" style="margin-left: 2%;">
+			<div class="progress-bar progress-bar-striped active" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+				<span class="sr-only">80%</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12"></div>
+	<div class="highlight-phone" style="margin-bottom: 20px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12">
-					<div class="introDescription col-lg-6">
-						<div id="descritpion" th:object="${project}">
-							<span th:text="${project.description}"></span>
-						</div>
+				<div class="introDescription col-lg-6">
+					<div id="descritpion" th:object="${project}">
+						<span th:text="${project.description}"></span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div>
+		<div class="lookingTask">
+			<input type="text" class="search form-control" placeholder="What you looking for?" />
+		</div>
+		<div class="container">
+			<!-- Trigger the modal with a button -->
+			<button type="button" class="btnTask" data-toggle="modal" data-target="#myModal">add task</button>
+			<form action="#" th:action="@{/taskAdd}" method="post" id="contact-form">
+				<!-- Modal -->
+				<div class="modal fade modalAddTask" id="myModal" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content addTaskModal">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add Task</h4>
+							</div>
+							<div class="modal-body">
+								<div class="messages"></div>
+								<div class="controls">
+									<div class="row">
+										<div class="col-md-10">
+											<div class="form-group">
+												<label class="control-label">Name </label><input class="form-control" type="text" name="name" required="" placeholder="" id=""/>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<label class="control-label">Progress </label><input class="form-control" type="text" name="progress" required="" placeholder="" id=""  value="0"/>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="controls">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label">Comment</label><input class="form-control" type="text" name="comment" required="" placeholder="" id="" />
+											</div>
+												<div class="form-group">
+												<label class="control-label">ID project</label><input th:value="${project.ID}" class="form-control" type="hidden" name="project" required="" placeholder="" id="" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn" name="ID">Add</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<table class="table table-hover table-bordered results tasksTable">
+			<thead>
+				<tr>
+					<th class="col-md-2 col-xs-1">Name</th>
+					<th class="col-md-2 col-xs-1">Progress %</th>
+					<th class="col-md-7 col-xs-7">Comment</th>
+				</tr>
+				<tr class="warning no-result">
+					<td colspan="4"><i class="fa fa-warning"></i>No result</td>
+				</tr>
+			</thead>
+			<tbody th:each="task : ${tasks}">
+				<tr>
+					<th class="col-md-2 col-xs-1 tableInfo" th:text="${task?.name}"></th>
+					<th class="col-md-2 col-xs-1 tableInfo" th:text="${task?.progress}"></th>
+					<th class="col-md-7 col-xs-7 tableInfo" th:text="${task?.comment}"></th>
+					<th class="col-md-1 col-xs-1 tableInfo" id="hiddenID"></th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

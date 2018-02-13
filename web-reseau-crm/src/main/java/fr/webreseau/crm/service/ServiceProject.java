@@ -29,13 +29,19 @@ public class ServiceProject implements IServiceProject {
 
 	@Override
 	public void modifyProject(Project project) {
-		// TODO Auto-generated method stub
+		dao.save(project);
 		
 	}
 
 	@Override
 	public void deleteProject(Long ID) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Project readOneProject(Long ID) {
+		return dao.findOne(ID);
 		
 	}
 
