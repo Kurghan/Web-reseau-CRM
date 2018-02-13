@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Edit project</title>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="row customerNameProject">
+			<h2 id="titleProject" th:object="${project}">
+		<span th:text="${project.name}"></span>
+	</h2>
+	<h3 id="titleCustomerProject"><span th:text="${project.customer.name} +' , '+ ${project.customer.firstName}"></span></h3>
+		</div>
+	</div>
+	<div class="dynamic-table">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<form action="#" th:action="@{/modifyProject}" th:object="${project}" method="post" id="contact-form">
+					<div class="controls">
+						<div class="row col-md-offset-3">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label">Project Name </label><input th:value="${project.name}" class="form-control" type="text" name="name" required="" placeholder="" id="" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">Description </label><input	th:value="${project.description}" class="form-control" type="text" name="description"	required="" placeholder="" id="" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="controls">
+						<div class="row col-md-offset-5">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label">Start date</label><input th:field="${project.startDate}" type="date" class="form-control" name="startDate" required=""	placeholder="" id="" />
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label">End date </label><input th:field="${project.deadLine}" type="date" class="form-control" name="deadLine" placeholder="" id="" />
+									<label class="control-label"></label><input th:field="${project.customer.ID}" type="hidden" class="form-control" name="customer" placeholder="" id="" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="btnAdd" type="submit" name="ID" th:value="${project.ID}">add</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
