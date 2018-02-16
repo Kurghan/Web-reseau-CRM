@@ -24,8 +24,7 @@ public class ServiceTask implements IServiceTask {
 
 	@Override
 	public ProjectTask readOneTask(Long ID) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.findOne(ID);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class ServiceTask implements IServiceTask {
 
 	@Override
 	public void modifyTask(ProjectTask task) {
-		// TODO Auto-generated method stub
+		dao.save(task);
 
 	}
 
