@@ -41,7 +41,7 @@ public class ServiceTask implements IServiceTask {
 
 	@Override
 	public void deleteTask(Long ID) {
-		// TODO Auto-generated method stub
+		dao.delete(ID);
 
 	}
 

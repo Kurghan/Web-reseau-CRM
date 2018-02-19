@@ -31,13 +31,15 @@ public class CustomerController {
 		return "welcome";
 
 	}
-
+	
+	//affichage de la page d'ajout client
 	@GetMapping("/addCustomer")
 	public String pageAddCustomer() {
 		return "customers/addCustomer";
 
 	}
 
+	//affichage de la page d'un client
 	@RequestMapping("/viewCustomer")
 	public String pageViewCustomer(@RequestParam(value = "ID") Long ID, Model model) {
 		ArrayList<Customer> listCustomers = service.readCustomers();
@@ -59,6 +61,7 @@ public class CustomerController {
 		return "customers/viewCustomer";
 	}
 
+	//affichage de la liste des clients
 	@GetMapping("/customers")
 	public String pageCustomer(Model model) {
 		ArrayList<Customer> listCustomers = service.readCustomers();
@@ -68,7 +71,7 @@ public class CustomerController {
 
 	}
 
-	/* Ajout d'un Customer */
+	/* Ajout d'un cleint */
 	@PostMapping("/customerAdd")
 	public String customerAdd(@Valid Customer customer) {
 		service.creatCustomer(customer);
@@ -76,6 +79,7 @@ public class CustomerController {
 		return "redirect:/customers";
 	}
 
+	//affichage de la page edition d'un client
 	@RequestMapping("/editCustomer")
 	public String editCustomer(@RequestParam(value = "ID") Long ID, Model model) {
 		ArrayList<Customer> listCustomers = service.readCustomers();
@@ -88,6 +92,7 @@ public class CustomerController {
 
 	}
 
+	//enregistrement de l'edition d'un client
 	@RequestMapping("/customerModify")
 	public String modifyCustomer(@Valid Customer customer) {
 		service.modifyCustomer(customer);

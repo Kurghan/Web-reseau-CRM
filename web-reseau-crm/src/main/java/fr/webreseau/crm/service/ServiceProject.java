@@ -23,7 +23,6 @@ public class ServiceProject implements IServiceProject {
 	@Override
 	public void creatProject(Project project) {
 		dao.save(project);
-		System.out.println(project);
 		
 	}
 

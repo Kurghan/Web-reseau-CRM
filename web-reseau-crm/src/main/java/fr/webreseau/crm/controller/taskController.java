@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.model.ProjectTask;
 import fr.webreseau.crm.service.IServiceProject;
@@ -34,12 +36,11 @@ public class taskController {
 	@RequestMapping("/taskEdit")
 	public String editTaskToProject(@Valid ProjectTask projectTask, Model model) {
 		ArrayList<ProjectTask> taskList = serviceTask.readTasks();
-		for(ProjectTask p : taskList) {
-			if(p.getID() == projectTask.getID()) {
+		for (ProjectTask p : taskList) {
+			if (p.getID() == projectTask.getID()) {
 				projectTask.setProject(p.getProject());
 			}
 		}
-		System.out.println(projectTask);
 		serviceTask.modifyTask(projectTask);
 		Long ID = projectTask.getProject().getID();
 		Project project = serviceProject.readOneProject(ID);
@@ -60,6 +61,17 @@ public class taskController {
 		return "projects/viewProject";
 
 	}
-	
+
+	// suppression d'un tache dans le projet
+	@RequestMapping("/taskDelete")
+	private String taskToDelete(@RequestParam(value = "ID") Long IDTask, Model model) {
+		ProjectTask task = serviceTask.readOneTask(IDTask);
+		Long ID = task.getProject().getID();
+		Project project = serviceProject.readOneProject(ID);
+		model.addAttribute("project", project);
+		serviceTask.deleteTask(IDTask);
+		return taskOfProject(model, ID);
+
+	}
 
 }

@@ -10,3 +10,9 @@ function getTask(ID){
 	document.getElementById("editTaskID").value = tasksTable.rows[IdRow].cells[5].innerHTML;
 }
 
+function getTaskToDelete(ID){
+	
+	document.getElementById("IDTaskToDelete").value = ID;
+	
+}
+

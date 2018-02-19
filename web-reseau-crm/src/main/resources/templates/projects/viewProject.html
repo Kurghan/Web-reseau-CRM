@@ -91,6 +91,7 @@
 			</form>
 		</div>
 		<div th:replace="fragments/modalTask :: modal"></div>
+		<div th:replace="fragments/modalAlert :: modalAlert"></div>
 		<table class="table table-hover table-bordered results tasksTable" id="tasksTable">
 			<thead>
 				<tr>
@@ -105,15 +106,14 @@
 					<th class="col-md-2 col-xs-1 tableInfo" th:text="${task?.name}"></th>
 					<th class="col-md-2 col-xs-1 tableInfo" th:text="${task?.progress}"></th>
 					<th class="col-md-7 col-xs-7 tableInfo" th:text="${task?.comment}"></th>
-					<th><input type="image" value="delete" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="Edit" data-toggle="modal" data-target="#myModalEdit"
-					 onclick="getTask(this)"/></th>
-					 <th><input type="image" value="delete" src="img/delete.png" style="width: 20px; margin-left: 20px;"/></th>
+					<th><input type="image" value="edit" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="Edit" data-toggle="modal" data-target="#myModalEdit" onclick="getTask(this)"/></th>
+					<th><input type="image" value="delete" src="img/delete.png" style="width: 20px; margin-left: 20px;" data-toggle="modal" data-target="#myModalAlert" th:onclick="'javascript:getTaskToDelete(' + ${task.ID}+ ')'"/></th>
 					<th class="col-md-7 col-xs-7 tableInfo" th:text="${task?.ID}" style="visibility: hidden;"></th>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<script src="js/Modal.js" type='text/javascript' charset="utf-8" ></script>		
+	<script src="js/viewProject.js" type='text/javascript' charset="utf-8" ></script>		
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
