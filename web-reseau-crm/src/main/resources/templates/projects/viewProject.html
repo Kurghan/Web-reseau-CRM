@@ -9,16 +9,16 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	<form action="#" th:action="@{/editProject}">
+	<div th:replace="fragments/modalEditProject :: modalEditProject"></div>
 		<h2 id="titleProject" th:object="${project}">
 			<span th:text="${project.name}"></span>
-			<input type="image" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="${project.ID}" name="ID" class="submit" />
+			<input type="image" value="edit" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="EditProject" data-toggle="modal" data-target="#myModalEditProject"/>
 		</h2>
 		<h3 id="titleCustomerProject">
-			<span
-				th:text="${project.customer.name} +' , '+ ${project.customer.firstName}"></span>
+			<span th:text="${project.customer.name} +' , '+ ${project.customer.firstName}"></span>
 		</h3>
-	</form>
+		<input type="hidden" th:value="${project.customer.ID}" id="IDCustomerForMessage" />
+		<input type="hidden" th:value="${project.ID}" id="IDProjectForMessage" />
 	<div class="col-md-12 col-lg-6">
 		<div th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}" class="pull-left" style="margin-right: 2px;"></div>
 		<div th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}" class="pull-right" style="margin-left: 2px;"></div>
@@ -41,70 +41,27 @@
 		</div>
 	</div>
 	<div>
-		<div class="container">
-			<!-- Trigger the modal with a button -->
-			<button type="button" class="btnTask" data-toggle="modal" data-target="#myModal">add task</button>
-			<form action="#" th:action="@{/taskAdd}" method="post" id="contact-form">
-				<!-- Modal -->
-				<div class="modal fade modalAddTask" id="myModal" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content addTaskModal">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Add Task</h4>
-							</div>
-							<div class="modal-body">
-								<div class="messages"></div>
-								<div class="controls">
-									<div class="row">
-										<div class="col-md-10">
-											<div class="form-group">
-												<label class="control-label">Name </label><input class="form-control" type="text" name="name" required="" placeholder="" id=""/>
-											</div>
-										</div>
-										<div class="col-md-2">
-											<div class="form-group">
-												<label class="control-label">Progress </label><input class="form-control" type="text" name="progress" required="" placeholder="" id=""  value="0"/>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="controls">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label">Comment</label><input class="form-control" type="text" name="comment" required="" placeholder="" id="" />
-											</div>
-												<div class="form-group">
-												<label class="control-label"></label><input th:value="${project.ID}" class="form-control" type="hidden" name="project" required="" placeholder="" id="" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="submit" class="btn" name="ID">Add</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
+		<div th:replace="fragments/modalAddTask :: modalAddTask"></div>
+		<div th:replace="fragments/modalNewMessage :: modalNewMessage"></div>
 		<div th:replace="fragments/modalTask :: modal"></div>
 		<div th:replace="fragments/modalAlert :: modalAlert"></div>
+		<div th:replace="fragments/modalReadMessage :: modalReadMessage"></div>
+		<div class="row">
+		<div class="col-sm-6">
+		<button type="button" class="btnTask" data-toggle="modal" data-target="#myModal">add task</button>
 		<table class="table table-hover table-bordered results tasksTable" id="tasksTable">
 			<thead>
 				<tr>
-					<th class="col-md-2 col-xs-1">Name</th>
-					<th class="col-md-2 col-xs-1">Progress %</th>
+					<th class="col-md-3 col-xs-3">Name</th>
+					<th class="col-md-1 col-xs-1">%</th>
 					<th class="col-md-7 col-xs-7">Comment</th>
 					<th class="col-md-1 col-xs-1">Edit</th>
 				</tr>
 			</thead>
 			<tbody th:each="task : ${tasks}">
 				<tr>
-					<th class="col-md-2 col-xs-1 tableInfo" th:text="${task?.name}"></th>
-					<th class="col-md-2 col-xs-1 tableInfo" th:text="${task?.progress}"></th>
+					<th class="col-md-3 col-xs-3 tableInfo" th:text="${task?.name}"></th>
+					<th class="col-md-1 col-xs-1 tableInfo" th:text="${task?.progress}"></th>
 					<th class="col-md-7 col-xs-7 tableInfo" th:text="${task?.comment}"></th>
 					<th><input type="image" value="edit" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="Edit" data-toggle="modal" data-target="#myModalEdit" onclick="getTask(this)"/></th>
 					<th><input type="image" value="delete" src="img/delete.png" style="width: 20px; margin-left: 20px;" data-toggle="modal" data-target="#myModalAlert" th:onclick="'javascript:getTaskToDelete(' + ${task.ID}+ ')'"/></th>
@@ -112,7 +69,30 @@
 				</tr>
 			</tbody>
 		</table>
+			</div>
+			<div class="col-sm-6">
+			<button type="button" class="btnTask" data-toggle="modal" data-target="#myModalNewMessage" onclick="getIDClient()">New message</button>
+			<table class="table table-hover table-bordered results tasksTable" id="messageTable">
+			<thead>
+				<tr>
+					<th class="col-md-3 col-xs-3">title</th>
+					<th class="col-md-2 col-xs-2">date</th>
+					<th class="col-md-7 col-xs-7">message</th>
+				</tr>
+			</thead>
+			<tbody th:each="message : ${messages}" th:onclick="'javascript:getIdMessage(this);'">
+				<tr >
+					<th class="col-md-3 col-xs-3 tableInfo" th:text="${message?.title}"></th>
+					<th class="col-md-2 col-xs-2 tableInfo" th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
+					<th class="col-md-6 col-xs-7 tableInfo" th:text="${message?.messageContent}" id="message"></th>
+					<th th:text="${message?.iDMessage}" style="visibility: hidden;"></th>
+				</tr>
+			</tbody>
+		</table>
+			</div>	
+		</div>
 	</div>
+		
 	<script src="js/viewProject.js" type='text/javascript' charset="utf-8" ></script>		
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

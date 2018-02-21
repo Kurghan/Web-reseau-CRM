@@ -6,12 +6,13 @@ body {
 	background-color: #d2d2d2;
 }
 
-.addTaskModal {
+.addTaskModal , .modalNewMessage, .modalAddTask , .modalAlert , .modalReadMessage , .replyMessage , .modalEditProject{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
 	color: #0093d3;
-	background-color: #d2d2d2;	
+	background-color: #d2d2d2;
+	margin-top: 30%;
 }
 
 img {
@@ -63,7 +64,7 @@ img {
 	font-size: 10px;
 }
 
-#addTitle {
+#addTitle ,#titleCustomerEditProject {
 	text-align: center;
 }
 
@@ -160,12 +161,12 @@ body {
 }
 
 .btnTask{
-	margin-left: 44%;
+	margin-left: 5%;
 }
 
-.modalAddTask{
+/*.modalAddTask{
 	margin-top: 15%;
-}
+}*/
 
 .modalAlert{
 	margin-top: 15%;
@@ -177,4 +178,21 @@ body {
 
 .warning{
 	text-align: center;
+}
+
+.modalAlert{
+	margin-top: 130%;
+}
+
+.replyMessage{
+	display: none;
+	margin-top: 0%;
+}
+
+.modalEditProject{
+	margin-top: 20%;
+}
+
+.btnModifyProject{
+margin-right: 45%;
 }
