@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>modalAlert</title>
+</head>
+<body>
+<form th:fragment="modalAlert" action="#" th:action="@{/taskDelete}" method="post" id="contact-form">
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModalAlert" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content modalAlert">
+        <div class="modal-header">
+          <h4 class="modal-title">Warning</h4>
+        </div>
+        <div class="modal-body">
+          <p class="warning">are you sure ?</p>
+        </div>
+        <div class="modal-footer">
+        	<input type="hidden" id="IDTaskToDelete"  name="ID"/>
+          		<button type="submit" class="btn btn-default">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+</body>
+</html>

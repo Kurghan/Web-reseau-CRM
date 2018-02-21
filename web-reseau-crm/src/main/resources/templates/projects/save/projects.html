@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProjectList</title>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="intro">
+			<h2 id="title">Projects</h2>
+			<div class="form-group" id="find">
+				<input type="text" class="search form-control"
+					placeholder="What you looking for?" />
+			</div>
+			<span class="counter pull-right"></span>
+			<form action="#" th:action="@{/viewProject}" th:object="${project}" method="post">
+			<table class="table table-hover table-bordered results" id="ProjectsTableTable" >
+				<thead>
+					<tr>
+						<th class="col-md-1 col-xs-1">Customer</th>
+						<th class="col-md-2 col-xs-2">Project Name </th>
+						<th class="col-md-3 col-xs-3">Description</th>
+						<th class="col-md-1 col-xs-1">Start date</th>
+						<th class="col-md-1 col-xs-1">End date</th>
+						<th class="col-md-1 col-xs-1">View</th>
+					</tr>
+					<tr class="warning no-result">
+						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+					</tr>
+				</thead>
+				<tbody th:each="project: ${listProjects}">
+					<tr>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${project.customer.name} +' '+ ${project.customer.firstName}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo" th:text="${project.name}"></th>
+						<th class="col-md-3 col-xs-3 tableInfo" th:text="${#strings.abbreviate(project.description,50)}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}"></th>
+						<th class="col-md-1 col-xs-1 tableInfo"><button type="submit" th:value="${project.ID}" name="ID" class="button">View</button></th>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/PHP-Contact-Form-dark.js"></script>
+	<script src="js/PHP-Contact-Form-dark1.js"></script>
+	<script src="js/Table-with-search.js"></script>
+	<script src="js/customers.js"></script>
+</body>
+
+</html>
