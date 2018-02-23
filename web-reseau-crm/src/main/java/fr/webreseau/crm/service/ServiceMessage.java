@@ -21,11 +21,15 @@ public class ServiceMessage implements IServiceMessage {
 		// TODO Auto-generated method stub
 		return (ArrayList<Message>) dao.findAll();
 	}
+	
+	@Override
+	public Message readOneMessage(Long ID) {
+		return dao.findOne(ID);
+	}
 
 	@Override
 	public void creatMessage(Message message) {
 		dao.save(message);
-		//System.out.println(message);
 
 	}
 

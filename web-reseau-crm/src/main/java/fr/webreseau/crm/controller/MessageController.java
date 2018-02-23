@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import fr.webreseau.crm.model.Message;
 import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.model.ProjectTask;
@@ -21,11 +23,10 @@ public class MessageController {
 
 	@Autowired
 	private IServiceMessage serviceMessage;
-	
+
 	@Autowired
 	private IServiceTask serviceTask;
-	
-	
+
 	@RequestMapping("/messageAdd")
 	public String newMessage(@Valid Message message, Model model) {
 		message.setRead(false);
@@ -33,7 +34,7 @@ public class MessageController {
 		message.setDate(date);
 		serviceMessage.creatMessage(message);
 		Project project = message.getProject();
-		model.addAttribute("project",project);
+		model.addAttribute("project", project);
 		ArrayList<ProjectTask> listTask = serviceTask.readTasks();
 		ArrayList<ProjectTask> listTasksThisProject = new ArrayList<ProjectTask>();
 		Long ID = message.getProject().getID();
@@ -44,7 +45,7 @@ public class MessageController {
 				model.addAttribute("tasks", listTasksThisProject);
 			}
 		}
-		
+
 		ArrayList<Message> listMessage = serviceMessage.readMessage();
 		ArrayList<Message> messagesOfProject = new ArrayList<Message>();
 		for (Message m : listMessage) {
@@ -52,9 +53,24 @@ public class MessageController {
 				messagesOfProject.add(m);
 			}
 		}
-		System.out.println(messagesOfProject);
 		Collections.reverse(messagesOfProject);
 		model.addAttribute("messages", messagesOfProject);
-		return "projects/viewProject";
+		return "forward:/viewProject";
+	}
+
+	@RequestMapping("/messageRead")
+	public String messageAsRead(@RequestParam(value = "IDmessageRead") Long ID) {
+		//System.out.println(ID);
+		Message message = serviceMessage.readOneMessage(ID);
+		message.setRead(true);
+		//System.out.println(message);
+		serviceMessage.editMessage(message);
+		return "forward:/viewProject";
+	}
+	
+	@RequestMapping("/messageReply")
+	public String messageReply(@RequestParam(value = "IDmessageReply") Long ID) {
+		System.out.println(ID);
+		return "forward:/viewProject";
 	}
 }

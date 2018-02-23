@@ -54,7 +54,6 @@ public class CustomerController {
 			if(p.getCustomer().getID()==ID) {
 				listCustomerProjects.add(p);
 				model.addAttribute("listCustomerProjects", listCustomerProjects);
-				System.out.println(listCustomerProjects);
 
 			}
 		}
@@ -66,7 +65,6 @@ public class CustomerController {
 	public String pageCustomer(Model model) {
 		ArrayList<Customer> listCustomers = service.readCustomers();
 		model.addAttribute("listCustomers", listCustomers);
-		//System.out.println(listCustomers);
 		return "customers/customers";
 
 	}
@@ -107,7 +105,6 @@ public class CustomerController {
 		for (Customer c : listCustomers) {
 			if (ID == c.getID()) {
 				model.addAttribute("customer",c);
-				System.out.println(c);
 			}
 		}
 		return "projects/addProject";

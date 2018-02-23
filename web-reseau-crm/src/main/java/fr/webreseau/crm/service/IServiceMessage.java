@@ -10,6 +10,8 @@ public interface IServiceMessage {
 
 	public ArrayList<Message> readMessage();
 	
+	public Message readOneMessage(Long ID);
+	
 	public void creatMessage(Message message);
 	
 	public void editMessage(Message message);

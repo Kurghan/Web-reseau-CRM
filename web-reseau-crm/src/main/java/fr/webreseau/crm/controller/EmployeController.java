@@ -37,14 +37,12 @@ public class EmployeController {
 	@PostMapping("/employeAdd")
 	public String employeAdd(@Valid Employe employe) {
 	service.creatEmploye(employe);
-	//System.out.println(employe);
 		
 		return "redirect:/employes";
 }
 	
 	@PostMapping("/deleteEmploye")
 	public String customerDelete(Employe employe) {
-		System.out.println(employe);
 		ArrayList<Employe> listEmploye = service.readEmploye();
 		for(Employe e : listEmploye){
 			if (e.getID().equals(employe.getID())) {
@@ -58,13 +56,11 @@ public class EmployeController {
 	@RequestMapping("/viewEmploye")
 	public String pageViewCustomer(@RequestParam(value = "ID") Long ID, Model model) {
 		ArrayList<Employe> listEmploye = service.readEmploye();
-		System.out.println(ID);
 		for (Employe e : listEmploye) {
 			if (ID == e.getID()) {
 				model.addAttribute("employe", e);
 			}
 		}
-		System.out.println(ID);
 		return "employes/viewEmploye";
 
 	}

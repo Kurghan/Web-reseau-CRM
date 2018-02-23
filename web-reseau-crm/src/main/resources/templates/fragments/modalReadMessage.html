@@ -6,17 +6,15 @@
 </head>
 <body>
 	<div class="container" th:fragment="modalReadMessage">
-		<!-- Trigger the modal with a button -->
-		<form action="#" th:action="@{/messageRead}" method="post"
-			th:object="${message}">
 			<!-- Modal -->
 			<div class="modal fade " id="myModalReadMessage" role="dialog">
 				<div class="modal-dialog modal-lg " id="modalReply">
 					<div class="modal-content modalReadMessage">
+					<form action="#" th:action="@{/messageRead}" method="post" th:object="${message}">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title" id="titleRead"></h4>
 							<h4 class="modal-date" id="dateRead"></h4>
+							<input type="hidden" id="IDmessageRead" name="IDmessageRead"/>
 						</div>
 						<div class="modal-body">
 							<h2 id="messageRead"></h2>
@@ -25,24 +23,26 @@
 							<button type="submit" class="btn" th:value="${project.ID}" name="ID">Close</button>
 							<button type="button" class="btn" name="ID" onclick="openReply()">Reply</button>
 						</div>
+						</form>
 					</div>
 					<div class="modal-content replyMessage"  id="divReply">
+					<form action="#" th:action="@{/messageReply}" method="post" th:object="${message}">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" class="close" onclick="closeReply()">&times;</button>
 							<h4 class="modal-title" id="titleReply"></h4>
 							<h4 class="modal-date" id="dateReply"></h4>
 						</div>
 						<div class="modal-body">
 							<textarea rows="5" cols="120" id="messageReply"></textarea>
+							<input type="text" id="IDmessageReply" name="IDmessageReply"/>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn" th:value="${project.ID}" name="ID">Close</button>
-							<button type="button" class="btn" name="ID" onclick="openReply()">Reply</button>
+							<button type="submit" class="btn" name="ID" th:value="${project.ID}">Close</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
-		</form>
 	</div>
 </body>
 </html>

@@ -63,7 +63,6 @@ public class ProjectController {
 	@RequestMapping("/projectAdd")
 	public String pageProjectAdd(@Valid Project project) {
 		service.creatProject(project);
-		// System.out.println(project.getCustomer().getName());
 		return "projects/viewProject";
 
 	}
