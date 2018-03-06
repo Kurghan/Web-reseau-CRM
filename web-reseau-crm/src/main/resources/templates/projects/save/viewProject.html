@@ -9,18 +9,16 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	<div th:replace="fragments/modalAddTask :: modaEditProject"></div>
-	<form action="#" th:action="@{/editProject}">
+	<div th:replace="fragments/modalEditProject :: modalEditProject"></div>
 		<h2 id="titleProject" th:object="${project}">
 			<span th:text="${project.name}"></span>
-			<input type="image" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="${project.ID}" name="ID" class="submit" />
+			<input type="image" value="edit" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="EditProject" data-toggle="modal" data-target="#myModalEditProject"/>
 		</h2>
 		<h3 id="titleCustomerProject">
 			<span th:text="${project.customer.name} +' , '+ ${project.customer.firstName}"></span>
 		</h3>
 		<input type="hidden" th:value="${project.customer.ID}" id="IDCustomerForMessage" />
 		<input type="hidden" th:value="${project.ID}" id="IDProjectForMessage" />
-	</form>
 	<div class="col-md-12 col-lg-6">
 		<div th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}" class="pull-left" style="margin-right: 2px;"></div>
 		<div th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}" class="pull-right" style="margin-left: 2px;"></div>
@@ -80,6 +78,7 @@
 					<th class="col-md-3 col-xs-3">title</th>
 					<th class="col-md-2 col-xs-2">date</th>
 					<th class="col-md-7 col-xs-7">message</th>
+					<th class="col-md-7 col-xs-7">Lu</th>
 				</tr>
 			</thead>
 			<tbody th:each="message : ${messages}" th:onclick="'javascript:getIdMessage(this);'">
@@ -87,6 +86,7 @@
 					<th class="col-md-3 col-xs-3 tableInfo" th:text="${message?.title}"></th>
 					<th class="col-md-2 col-xs-2 tableInfo" th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
 					<th class="col-md-6 col-xs-7 tableInfo" th:text="${message?.messageContent}" id="message"></th>
+					<th class="col-md-1 col-xs-1 tableInfo" th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
 					<th th:text="${message?.iDMessage}" style="visibility: hidden;"></th>
 				</tr>
 			</tbody>

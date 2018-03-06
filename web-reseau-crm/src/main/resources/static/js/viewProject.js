@@ -27,7 +27,7 @@ function getIDClient(){
 
 	//recuperation d'un message pour l'afficher dans un modal
 function getIdMessage(tab){
-	var ID = tab.getElementsByTagName("tr")[0].cells[4];
+	var ID = tab.getElementsByTagName("tr")[0].cells[5];
 	var message = tab.getElementsByTagName("tr")[0].cells[2];
 	var date = tab.getElementsByTagName("tr")[0].cells[1];
 	var title = tab.getElementsByTagName("tr")[0].cells[0];
@@ -43,7 +43,7 @@ function getIdMessage(tab){
 function openReply(){
 	document.getElementById("divReply").style.display = "block";
 	var ID = document.getElementById("IDmessageRead").value;
-	alert(ID);
+	//alert(ID);
 	document.getElementById("IDmessageReply").value = ID;
 }
 

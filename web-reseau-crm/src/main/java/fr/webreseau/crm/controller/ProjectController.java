@@ -56,6 +56,7 @@ public class ProjectController {
 			}
 		}
 		serviceMessage.getMessageListOfProject(ID, model);
+		serviceMessage.getReplyOfMessage(ID, model);
 		
 		return "projects/viewProject";
 	}

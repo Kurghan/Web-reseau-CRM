@@ -19,4 +19,6 @@ public interface IServiceMessage {
 	public void deleteMessage(Long ID);
 	
 	public ArrayList<Message> getMessageListOfProject(Long ID , Model model);
+	
+	public ArrayList<Message> getReplyOfMessage(Long IDMessage ,Model model);
 }

@@ -18,12 +18,12 @@ public class ServiceMessage implements IServiceMessage {
 
 	@Override
 	public ArrayList<Message> readMessage() {
-		// TODO Auto-generated method stub
 		return (ArrayList<Message>) dao.findAll();
 	}
 	
 	@Override
 	public Message readOneMessage(Long ID) {
+		System.out.println(ID);
 		return dao.findOne(ID);
 	}
 
@@ -47,9 +47,9 @@ public class ServiceMessage implements IServiceMessage {
 	
 	// recuperation de la liste des messages du projet pour le tableau des messages
 	public ArrayList<Message> getMessageListOfProject(Long ID, Model model) {
-		ArrayList<Message> listMessage = (ArrayList<Message>) dao.findAll();
+		ArrayList<Message> listMessages = (ArrayList<Message>) dao.findAll();
 		ArrayList<Message> messagesOfProject = new ArrayList<Message>();
-		for (Message m : listMessage) {
+		for (Message m : listMessages) {
 			if (m.getProject().getID() == ID) {
 				messagesOfProject.add(m);
 			}
@@ -59,4 +59,16 @@ public class ServiceMessage implements IServiceMessage {
 		return messagesOfProject;
 	}
 
+	//recuperation de la liste des reponses d'un message
+	public ArrayList<Message> getReplyOfMessage(Long IDMessage ,Model model){
+		ArrayList<Message> listMessages = (ArrayList<Message>) dao.findAll();
+		ArrayList<Message> messagesReply = new ArrayList<Message>();
+		for(Message m : listMessages) {
+			if (m.getMessageSources() == IDMessage) {
+				messagesReply.add(m);
+			}
+		}
+		model.addAttribute("messagesReply", messagesReply);
+		return messagesReply;
+	}
 }

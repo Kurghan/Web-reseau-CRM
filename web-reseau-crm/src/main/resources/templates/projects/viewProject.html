@@ -79,6 +79,7 @@
 					<th class="col-md-2 col-xs-2">date</th>
 					<th class="col-md-7 col-xs-7">message</th>
 					<th class="col-md-7 col-xs-7">Lu</th>
+					<th class="col-md-1 col-xs-1">reply</th>
 				</tr>
 			</thead>
 			<tbody th:each="message : ${messages}" th:onclick="'javascript:getIdMessage(this);'">
@@ -87,6 +88,7 @@
 					<th class="col-md-2 col-xs-2 tableInfo" th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
 					<th class="col-md-6 col-xs-7 tableInfo" th:text="${message?.messageContent}" id="message"></th>
 					<th class="col-md-1 col-xs-1 tableInfo" th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
+					<th class="col-md-1 col-xs-1 tableInfo" th:text="${message?.nbReply}" id="message"></th>
 					<th th:text="${message?.iDMessage}" style="visibility: hidden;"></th>
 				</tr>
 			</tbody>

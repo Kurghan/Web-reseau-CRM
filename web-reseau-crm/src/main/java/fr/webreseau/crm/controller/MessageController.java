@@ -66,11 +66,27 @@ public class MessageController {
 		//System.out.println(message);
 		serviceMessage.editMessage(message);
 		return "forward:/viewProject";
+		//return "welcome";
 	}
 	
 	@RequestMapping("/messageReply")
-	public String messageReply(@RequestParam(value = "IDmessageReply") Long ID) {
-		System.out.println(ID);
-		return "forward:/viewProject";
+	public String messageReply(@RequestParam(value = "IDmessageReply") Long ID,@RequestParam(value="messageReply") String text ) {
+		//System.out.println(ID);
+		Message message = serviceMessage.readOneMessage(ID);
+		Message messageReply =  new Message();
+		Date date = new Date();
+		messageReply.setDate(date);
+		messageReply.setMessageSources(ID);
+		messageReply.setCustomer(message.getCustomer());
+		messageReply.setProject(message.getProject());
+		messageReply.setRead(false);
+		messageReply.setMessageContent(text);
+		messageReply.setTitle(message.getTitle());
+		messageReply.setMessageSources(message.getMessageSources());
+		message.setNbReply(message.getNbReply() + 1);
+		System.out.println(messageReply);
+		serviceMessage.creatMessage(messageReply);
+		serviceMessage.creatMessage(message);
+		return "forward:/messageRead";
 	}
 }

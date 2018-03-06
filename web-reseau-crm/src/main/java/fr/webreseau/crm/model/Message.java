@@ -25,10 +25,13 @@ public class Message {
 	private Date date;
 	private Customer customer;
 	private Project project;
+	private Long messageSources;
+	private int nbReply;
 	
+
 	
 	public Message(Long iDMessage, String title, String messageContent, Boolean read, Date date, Customer customer,
-			Project project) {
+			Project project, Long messageSources , int nbReply) {
 		super();
 		IDMessage = iDMessage;
 		this.title = title;
@@ -37,6 +40,8 @@ public class Message {
 		this.date = date;
 		this.customer = customer;
 		this.project = project;
+		this.messageSources = messageSources;
+		this.nbReply = nbReply;
 	}
 
 	public Message() {}
@@ -48,7 +53,6 @@ public class Message {
 		return IDMessage;
 	}
 
-
 	public void setIDMessage(Long iDMessage) {
 		IDMessage = iDMessage;
 	}
@@ -57,7 +61,6 @@ public class Message {
 	public String getTitle() {
 		return title;
 	}
-
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -68,7 +71,6 @@ public class Message {
 		return messageContent;
 	}
 
-
 	public void setMessageContent(String messageContent) {
 		this.messageContent = messageContent;
 	}
@@ -77,7 +79,6 @@ public class Message {
 	public Boolean getRead() {
 		return read;
 	}
-
 	
 	public void setRead(Boolean read) {
 		this.read = read;
@@ -87,7 +88,6 @@ public class Message {
 	public Date getDate() {
 		return date;
 	}
-
 	
 	public void setDate(Date date) {
 		this.date = date;
@@ -99,7 +99,6 @@ public class Message {
 		return customer;
 	}
 
-
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
@@ -110,18 +109,32 @@ public class Message {
 		return project;
 	}
 
-
 	public void setProject(Project project) {
 		this.project = project;
 	}
+	
+	@JoinColumn(name="IDmessageReply")
+	public Long getMessageSources() {
+		return messageSources;
+	}
 
+	public void setMessageSources(Long messageSources) {
+		this.messageSources = messageSources;
+	}
+
+	@JoinColumn(name="nbReply")
+	public int getNbReply() {
+		return nbReply;
+	}
+
+	public void setNbReply(int nbReply) {
+		this.nbReply = nbReply;
+	}
 
 	@Override
 	public String toString() {
 		return "Message [IDMessage=" + IDMessage + ", title=" + title + ", messageContent=" + messageContent + ", read="
-				+ read + ", date=" + date + ", customer=" + customer + ", project=" + project + "]";
+				+ read + ", date=" + date + ", customer=" + customer + ", project=" + project + ", messageSources=" + messageSources + "]";
 	}
-
-	
 	
 }
