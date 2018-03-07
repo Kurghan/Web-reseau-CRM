@@ -27,6 +27,15 @@ public class MessageController {
 	@Autowired
 	private IServiceTask serviceTask;
 
+	
+	@RequestMapping("/listMail")
+	public String pageMail(Model model) {
+		ArrayList<Message> listMessage = serviceMessage.readMessage();
+		Collections.reverse(listMessage);
+		model.addAttribute("messages",listMessage);
+		return "mail/listMail";
+	}
+	
 	@RequestMapping("/messageAdd")
 	public String newMessage(@Valid Message message, Model model) {
 		message.setRead(false);
@@ -57,21 +66,9 @@ public class MessageController {
 		model.addAttribute("messages", messagesOfProject);
 		return "forward:/viewProject";
 	}
-
-	@RequestMapping("/messageRead")
-	public String messageAsRead(@RequestParam(value = "IDmessageRead") Long ID) {
-		//System.out.println(ID);
-		Message message = serviceMessage.readOneMessage(ID);
-		message.setRead(true);
-		//System.out.println(message);
-		serviceMessage.editMessage(message);
-		return "forward:/viewProject";
-		//return "welcome";
-	}
 	
 	@RequestMapping("/messageReply")
 	public String messageReply(@RequestParam(value = "IDmessageReply") Long ID,@RequestParam(value="messageReply") String text ) {
-		//System.out.println(ID);
 		Message message = serviceMessage.readOneMessage(ID);
 		Message messageReply =  new Message();
 		Date date = new Date();
@@ -82,11 +79,20 @@ public class MessageController {
 		messageReply.setRead(false);
 		messageReply.setMessageContent(text);
 		messageReply.setTitle(message.getTitle());
-		messageReply.setMessageSources(message.getMessageSources());
 		message.setNbReply(message.getNbReply() + 1);
-		System.out.println(messageReply);
+		message.setRead(true);
 		serviceMessage.creatMessage(messageReply);
 		serviceMessage.creatMessage(message);
-		return "forward:/messageRead";
+		return "forward:/viewProject";
 	}
+	
+	@RequestMapping("/openMessage")
+	public String openMessage(@RequestParam(value = "ID") Long ID,Model model) {
+		Message message = serviceMessage.readOneMessage(ID);
+		message.setRead(true);
+		serviceMessage.editMessage(message);
+		model.addAttribute("message",message);
+		return "mail/mail";
+	}
+	
 }

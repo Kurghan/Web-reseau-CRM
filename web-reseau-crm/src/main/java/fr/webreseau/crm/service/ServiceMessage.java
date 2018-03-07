@@ -23,7 +23,6 @@ public class ServiceMessage implements IServiceMessage {
 	
 	@Override
 	public Message readOneMessage(Long ID) {
-		System.out.println(ID);
 		return dao.findOne(ID);
 	}
 
@@ -56,11 +55,12 @@ public class ServiceMessage implements IServiceMessage {
 		}
 		Collections.reverse(messagesOfProject);
 		model.addAttribute("messages", messagesOfProject);
+		
 		return messagesOfProject;
 	}
 
 	//recuperation de la liste des reponses d'un message
-	public ArrayList<Message> getReplyOfMessage(Long IDMessage ,Model model){
+	/*public ArrayList<Message> getReplyOfMessage(Long IDMessage ,Model model){
 		ArrayList<Message> listMessages = (ArrayList<Message>) dao.findAll();
 		ArrayList<Message> messagesReply = new ArrayList<Message>();
 		for(Message m : listMessages) {
@@ -70,5 +70,5 @@ public class ServiceMessage implements IServiceMessage {
 		}
 		model.addAttribute("messagesReply", messagesReply);
 		return messagesReply;
-	}
+	}*/
 }

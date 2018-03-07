@@ -25,29 +25,10 @@ function getIDClient(){
 	document.getElementById("IDProjectMessage").value = IDProject;
 }
 
-	//recuperation d'un message pour l'afficher dans un modal
+	//recuperation d'un message pour la page message
 function getIdMessage(tab){
 	var ID = tab.getElementsByTagName("tr")[0].cells[5];
-	var message = tab.getElementsByTagName("tr")[0].cells[2];
-	var date = tab.getElementsByTagName("tr")[0].cells[1];
-	var title = tab.getElementsByTagName("tr")[0].cells[0];
-	document.getElementById("titleRead").innerHTML = title.innerHTML;
-	document.getElementById("messageRead").innerHTML = message.innerHTML;
-	document.getElementById("dateRead").innerHTML = date.innerHTML;
-	document.getElementById("IDmessageRead").value = ID.innerHTML;
-	$('#myModalReadMessage').modal('show');
-	//alert(title.innerHTML);
+	document.getElementById("IDmessageForm").value = ID.innerHTML;
+	document.getElementById("formMessage").submit(ID);
 }
 	
-	//ouverture de la fenetre de reponse message
-function openReply(){
-	document.getElementById("divReply").style.display = "block";
-	var ID = document.getElementById("IDmessageRead").value;
-	//alert(ID);
-	document.getElementById("IDmessageReply").value = ID;
-}
-
-	//fermeture de la fenetre de reponse message
-function closeReply(){
-	document.getElementById("divReply").style.display = "none";
-}

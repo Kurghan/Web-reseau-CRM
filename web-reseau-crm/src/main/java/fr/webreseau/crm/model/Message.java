@@ -113,7 +113,7 @@ public class Message {
 		this.project = project;
 	}
 	
-	@JoinColumn(name="IDmessageReply")
+	@JoinColumn(name="messageSources")
 	public Long getMessageSources() {
 		return messageSources;
 	}

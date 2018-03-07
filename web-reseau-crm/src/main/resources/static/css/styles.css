@@ -6,7 +6,8 @@ body {
 	background-color: #d2d2d2;
 }
 
-.addTaskModal , .modalNewMessage, .modalAddTask , .modalAlert , .modalReadMessage , .replyMessage , .modalEditProject{
+.addTaskModal, .modalNewMessage, .modalAddTask, .modalAlert,
+	.modalReadMessage, .replyMessage, .modalEditProject {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
@@ -30,7 +31,6 @@ img {
 	border: #0093d3;
 	color: #0093d3;
 	max-width: 80%;
-	/*margin-top: 5%;*/
 	margin-left: 5%;
 }
 
@@ -42,8 +42,8 @@ img {
 }
 
 #title {
-	margin-top:50px;
-	margin-bottom:50px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 	text-align: center;
 }
 
@@ -51,7 +51,6 @@ img {
 	width: 100%;
 	height: 100%;
 }
-
 
 .search {
 	position: relative;
@@ -64,7 +63,7 @@ img {
 	font-size: 10px;
 }
 
-#addTitle ,#titleCustomerEditProject {
+#addTitle, #titleCustomerEditProject {
 	text-align: center;
 }
 
@@ -117,7 +116,6 @@ body {
 }
 
 .introDescription {
-	/*width: 50%;*/
 	border: solid;
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -125,74 +123,106 @@ body {
 	padding-right: 20px;
 }
 
-#projectName #startDate{
+#projectName #startDate {
 	margin-left: 100px;
 }
 
-.customerNameProject{
+.customerNameProject {
 	margin-top: 50px;
 	margin-bottom: 50px;
 	font-size: 25px;
-	
 }
 
-#titleProject{
-	/*margin-bottom: 100px;*/
+#titleProject {
 	text-align: center;
-	margin-top:50px;
+	margin-top: 50px;
 }
 
-#titleCustomerProject{
+#titleCustomerProject {
 	margin-bottom: 100px;
 	text-align: center;
-	}
+}
 
-.tasksTable{
+.tasksTable {
 	width: 900px;
 }
 
-#hiddenID{
+#hiddenID {
 	visibility: hidden;
 }
 
-.lookingTask{
+.lookingTask {
 	width: 200px;
 	margin-left: 45px;
 }
 
-.btnTask{
+.btnTask {
 	margin-left: 5%;
 }
 
-/*.modalAddTask{
-	margin-top: 15%;
-}*/
-
-.modalAlert{
+.modalAlert {
 	margin-top: 15%;
 }
 
-#IDTask{
+#IDTask {
 	visibility: hidden;
 }
 
-.warning{
+.warning {
 	text-align: center;
 }
 
-.modalAlert{
+.modalAlert {
 	margin-top: 130%;
 }
 
-.replyMessage{
+.replyMessage {
 	display: none;
 	margin-top: 0%;
 }
 
-.modalEditProject{
+.modalEditProject {
 	margin-top: 20%;
 }
 
-.btnModifyProject{
-margin-right: 45%;
+.btnModifyProject {
+	margin-right: 45%;
+}
+
+/*.messsages-table thead{
+	display: block;
+	width: 100%;
+}
+
+.messsages-table {
+	display : block;
+	overflow-Y: auto;
+	overflow-X: hidden;
+	height: 200px;
+}*/
+
+.messsages-table td{
+	
+}
+
+.message_mail_title {
+	text-transform:uppercase;
+	text-align: center;
+	font-size: 25px;
+}
+
+.message_mail_messageContent{
+	height:250px;
+	font-size: 20px;
+	margin : auto ;
+	border-radius:5px;
+	margin-top: 20px;
+	padding: 10px;
+	background: RGBA(255,255,255,0.2);
+	word-wrap: break-word;
+}
+
+.message_mail_customer_name{
+	font-size: 25px;
+	margin-left: 80%;
 }

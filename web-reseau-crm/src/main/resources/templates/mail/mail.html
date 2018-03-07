@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8" />
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="intro">
+			<div class="message_mail_title">
+				<span th:text="${message.title}">title</span>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-1 col-md-10">
+					<div class="row message_mail_messageContent">
+						<span th:text="${message.messageContent}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col message_mail_customer_name">
+					<span th:text="${message.customer.name}"></span> <span
+						th:text="${message.customer.firstName}"></span>
+				</div>
+				<div class="col message_mail_project_name">
+					<span th:text="${message.project.name}"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/mail.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/Table-with-search.js"></script>
+</body>
+</html>
