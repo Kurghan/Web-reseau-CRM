@@ -53,22 +53,21 @@ public class ServiceMessage implements IServiceMessage {
 				messagesOfProject.add(m);
 			}
 		}
-		Collections.reverse(messagesOfProject);
+		//Collections.reverse(messagesOfProject);
 		model.addAttribute("messages", messagesOfProject);
 		
 		return messagesOfProject;
 	}
-
-	//recuperation de la liste des reponses d'un message
-	/*public ArrayList<Message> getReplyOfMessage(Long IDMessage ,Model model){
+	
+	public ArrayList<Message> getListReply(Long ID){
 		ArrayList<Message> listMessages = (ArrayList<Message>) dao.findAll();
-		ArrayList<Message> messagesReply = new ArrayList<Message>();
+		ArrayList<Message> listMessagesReply = new ArrayList<Message>();
 		for(Message m : listMessages) {
-			if (m.getMessageSources() == IDMessage) {
-				messagesReply.add(m);
+			if (m.getMessageSources() == ID) {
+				listMessagesReply.add(m);
 			}
 		}
-		model.addAttribute("messagesReply", messagesReply);
-		return messagesReply;
-	}*/
+		Collections.reverse(listMessagesReply);
+		return listMessagesReply;
+	}
 }

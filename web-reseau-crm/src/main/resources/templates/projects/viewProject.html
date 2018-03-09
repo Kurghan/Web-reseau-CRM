@@ -43,12 +43,11 @@
 	</div>
 	<div>
 		<div th:replace="fragments/modalAddTask :: modalAddTask"></div>
-		<div th:replace="fragments/modalNewMessage :: modalNewMessage"></div>
 		<div th:replace="fragments/modalTask :: modal"></div>
 		<div th:replace="fragments/modalAlert :: modalAlert"></div>
 		<div class="row">
 			<div class="col-sm-6">
-				<button type="button" class="btnTask" data-toggle="modal" data-target="#myModal">add task</button>
+				<button type="button" class="btn btnTask" data-toggle="modal" data-target="#myModal">add task</button>
 				<table class="table table-hover table-bordered results tasksTable" id="tasksTable">
 					<thead>
 						<tr>
@@ -70,11 +69,11 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="col-sm-6">
-			<button type="button" class="btnTask" data-toggle="modal" data-target="#myModalNewMessage" onclick="getIDClient()">New message</button>
+			<div class="col-sm-6 messages-project">
+				<span id="lastMessage">last message</span>
 				<form action="#" th:action="@{/openMessage}" method="post" id="formMessage">
 				<input type="hidden" id="IDmessageForm" name="ID"/>
-				<table class="table-hover table-bordered messsages-table"	id="messageTable">
+				<table class="table table-hover table-bordered messsages-table"	id="messageTable">
 					<thead>
 						<tr>
 							<th class="col-md-3 col-xs-3">title</th>
@@ -84,7 +83,7 @@
 							<th class="col-md-1 col-xs-1">reply</th>
 						</tr>
 					</thead>
-					<tbody th:each="message : ${messages}" th:onclick="'javascript:getIdMessage(this);'">
+					<tbody th:each="message,iterStat : ${messages}" th:if="${iterStat.index >= iterStat.size-1}" th:onclick="'javascript:getIdMessage(this);'">
 						<tr >
 							<th class="col-md-3 col-xs-3 tableInfo" th:text="${#strings.abbreviate(message?.title,25)}"></th>
 							<th class="col-md-2 col-xs-2 tableInfo" th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
@@ -95,6 +94,12 @@
 						</tr>
 					</tbody>
 				</table>
+				</form>
+				<form action="#" th:action="@{/openMessagesProject}" method="post">
+				<input type="hidden" name="ID" id="IDMessageProject"/>
+				<input type="submit" class="btn btn-history" value ="Old messages" name="action"/>
+				<input type="submit" class="btn btn-history" value ="new messages" name="action"/>
+				<input type="hidden" th:value="${project.ID}" id="IDProject" name="IDProject"/>
 				</form>
 			</div>
 		</div>

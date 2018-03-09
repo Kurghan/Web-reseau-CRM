@@ -6,8 +6,8 @@ body {
 	background-color: #d2d2d2;
 }
 
-.addTaskModal, .modalNewMessage, .modalAddTask, .modalAlert,
-	.modalReadMessage, .replyMessage, .modalEditProject {
+.addTaskModal, .modalAddTask, .modalAlert,
+	.modalReply, .replyMessage, .modalEditProject {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
@@ -30,8 +30,7 @@ img {
 .table {
 	border: #0093d3;
 	color: #0093d3;
-	max-width: 80%;
-	margin-left: 5%;
+	/*max-width: 80%;*/
 }
 
 .btnAdd {
@@ -88,9 +87,9 @@ body {
 	padding: 20px 20px;
 }
 
-.results tr[visible='true'] {
+/*.results tr[visible='true'] {
 	display: table-row;
-}
+}*/
 
 .counter {
 	padding: 8px;
@@ -168,7 +167,7 @@ body {
 	visibility: hidden;
 }
 
-.warning {
+.warning{
 	text-align: center;
 }
 
@@ -185,24 +184,16 @@ body {
 	margin-top: 20%;
 }
 
+/*.btn-history{
+	margin-left: 50%;
+}*/
+
 .btnModifyProject {
 	margin-right: 45%;
 }
-
-/*.messsages-table thead{
-	display: block;
-	width: 100%;
-}
-
 .messsages-table {
 	display : block;
-	overflow-Y: auto;
-	overflow-X: hidden;
-	height: 200px;
-}*/
-
-.messsages-table td{
-	
+	margin-top: 5px;
 }
 
 .message_mail_title {
@@ -225,4 +216,44 @@ body {
 .message_mail_customer_name{
 	font-size: 25px;
 	margin-left: 80%;
+}
+
+/*#lastMessage{
+	margin-left: 50%;
+}*/
+
+.messages-project{
+	text-align: center;
+}
+
+.titleNewMail ,.textNewMail{
+	background: RGBA(255,255,255,0.5);
+	border-radius:5px;
+}
+
+.titleNewMail{
+	height: 30px;
+	margin-top: 40px;
+}
+
+.textNewMail{
+	margin-top: 20px;
+}
+
+.btnReply{
+	margin-bottom: 20px;
+}
+
+.btnSendNewMail{
+text-align: center;	
+margin-top: 20px;
+}
+
+#formReply{
+	position:relative;
+}
+
+.tableReply{
+	margin: auto;
+	width: 80%;
 }

@@ -16,6 +16,7 @@ import fr.webreseau.crm.model.Message;
 import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.model.ProjectTask;
 import fr.webreseau.crm.service.IServiceMessage;
+import fr.webreseau.crm.service.IServiceProject;
 import fr.webreseau.crm.service.IServiceTask;
 
 @Controller
@@ -26,13 +27,23 @@ public class MessageController {
 
 	@Autowired
 	private IServiceTask serviceTask;
+	
+	@Autowired
+	private IServiceProject serviceProject;
 
 	
 	@RequestMapping("/listMail")
 	public String pageMail(Model model) {
-		ArrayList<Message> listMessage = serviceMessage.readMessage();
-		Collections.reverse(listMessage);
-		model.addAttribute("messages",listMessage);
+		ArrayList<Message> listMessages = serviceMessage.readMessage();
+		ArrayList<Message> listMessagesSource = new ArrayList<Message>();
+		for(Message m :listMessages) {
+			if(m.getMessageSources() == null) {
+			listMessagesSource.add(m);
+			}
+		}
+		Collections.reverse(listMessagesSource);
+		model.addAttribute("messages",listMessagesSource);
+		//System.out.println(listMessagesSource);
 		return "mail/listMail";
 	}
 	
@@ -67,7 +78,7 @@ public class MessageController {
 		return "forward:/viewProject";
 	}
 	
-	@RequestMapping("/messageReply")
+	/*@RequestMapping("/messageReply")
 	public String messageReply(@RequestParam(value = "IDmessageReply") Long ID,@RequestParam(value="messageReply") String text ) {
 		Message message = serviceMessage.readOneMessage(ID);
 		Message messageReply =  new Message();
@@ -84,15 +95,56 @@ public class MessageController {
 		serviceMessage.creatMessage(messageReply);
 		serviceMessage.creatMessage(message);
 		return "forward:/viewProject";
-	}
+	}*/
 	
 	@RequestMapping("/openMessage")
 	public String openMessage(@RequestParam(value = "ID") Long ID,Model model) {
+		ArrayList<Message> listMessagesReply = serviceMessage.getListReply(ID);
 		Message message = serviceMessage.readOneMessage(ID);
 		message.setRead(true);
-		serviceMessage.editMessage(message);
+		serviceMessage.creatMessage(message);
 		model.addAttribute("message",message);
+		model.addAttribute("messagesReply",listMessagesReply);
 		return "mail/mail";
 	}
 	
+	@RequestMapping(value ="/openMessagesProject",params="action=Old messages")
+	public String openMessagesProject(@RequestParam(value = "IDProject") Long ID,Model model) {
+		ArrayList<Message> listMessage = serviceMessage.readMessage();
+		ArrayList<Message> messagesOfProject = new ArrayList<Message>();
+		for(Message m :listMessage) {
+			if(m.getProject().getID() == ID && m.getMessageSources() == null) {
+				messagesOfProject.add(m);
+			}
+		}
+		Collections.reverse(messagesOfProject);
+		model.addAttribute("messages",messagesOfProject);
+		return "mail/listMailProject";
+	}
+	
+	@RequestMapping(value ="/openMessagesProject",params="action=new messages")
+	public String creatNewMessageProject(@RequestParam(value = "IDProject") Long ID,Model model) {
+		//System.out.println(ID);
+		Project project = serviceProject.readOneProject(ID);
+		model.addAttribute("project",project);
+		return "mail/newMailProject";
+	}
+	
+	@RequestMapping(value ="/newMessage")
+	public String creatMessage(@Valid Message message) {
+		message.setDate(new Date());
+		message.setRead(false);
+		if(message.getMessageSources()!= null) {
+			Message messageSource = serviceMessage.readOneMessage(message.getMessageSources());
+			if(messageSource.getMessageSources()!=null) {
+				message.setMessageSources(messageSource.getMessageSources());
+			}
+			Message messageOrigin = serviceMessage.readOneMessage(message.getMessageSources());
+			messageOrigin.setNbReply(messageOrigin.getNbReply()+1);
+			serviceMessage.creatMessage(message);
+			}
+		else serviceMessage.creatMessage(message);
+		return "mail/mail";
+		
+	}
 }

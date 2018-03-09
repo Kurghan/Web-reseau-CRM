@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>modal Read Message</title>
+</head>
+<body>
+	<div class="container" th:fragment="modalReply">
+		<!-- Modal -->
+		<div class="modal fade " id="myModalReply" role="dialog">
+			<div class="modal-dialog modal-lg " id="modalReply">
+				<div class="modal-content modalReply">
+					<div class="row" ID="formReply">
+						<form action="#" th:action="@{/newMessage}" method="post" th:object="${project}">
+							<div class="message_mail_title"></div>
+							<div class="row">
+								<div class="col-md-offset-1 col-md-10">
+									<div class="row">
+										<textarea class="form-control textNewMail" rows="9" cols="120" name="messageContent"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="btnSendNewMail">
+									<input class="btn btnReply" type="submit" value="Send" />
+								</div>
+									<input type="hidden" th:value="${message.iDMessage}" name="messageSources" />
+									<input type="hidden" th:value="${message.title}" name="title" /> 
+									<input	type="hidden" th:value="${message.customer.ID}" name="customer" />
+									<input type="hidden" th:value="${message.project.ID}" name="project" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

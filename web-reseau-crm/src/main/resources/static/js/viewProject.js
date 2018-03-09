@@ -13,9 +13,7 @@ function getTask(ID){
 
 	//recuperation de l'ID d'une tache pour la supprimer
 function getTaskToDelete(ID){
-	
 	document.getElementById("IDTaskToDelete").value = ID;
-	
 }
 
 function getIDClient(){
@@ -31,4 +29,6 @@ function getIdMessage(tab){
 	document.getElementById("IDmessageForm").value = ID.innerHTML;
 	document.getElementById("formMessage").submit(ID);
 }
-	
+
+var IDProject = document.getElementById("IDProject").innerHTML;
+document.getElementById("IDMessageProject").value = IDProject;
