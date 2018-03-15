@@ -23,9 +23,9 @@ public abstract class Person {
 	private String address;
 	private String city;
 	private String country;
+	private String role;
 	
-	
-	public Person(Long iD, String name, String firstName, String mail, String password, String phone, String address, String city, String country) {
+	public Person(Long iD, String name, String firstName, String mail, String password, String phone, String address, String city, String country,String role) {
 		super();
 		ID = iD;
 		this.name = name;
@@ -36,6 +36,7 @@ public abstract class Person {
 		this.address = address;
 		this.city = city;
 		this.country = country;
+		this.role = role;
 	}
 	
 	public Person() {}
@@ -128,12 +129,22 @@ public abstract class Person {
 		this.country = country;
 	}
 
+	@Column(name="RolePerson")
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
 		return "Person [ID=" + ID + ", name=" + name + ", firstName=" + firstName + ", mail=" + mail + ", password="
 				+ password + ", phone=" + phone + ", address=" + address + ", city=" + city + ", country=" + country
-				+ "]";
+				+ ", role=" + role + "]";
 	}
+
 	
 	
 	

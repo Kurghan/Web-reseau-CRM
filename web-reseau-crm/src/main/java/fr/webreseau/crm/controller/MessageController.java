@@ -17,6 +17,7 @@ import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.model.ProjectTask;
 import fr.webreseau.crm.service.IServiceMessage;
 import fr.webreseau.crm.service.IServiceProject;
+import fr.webreseau.crm.service.IServiceSessionUser;
 import fr.webreseau.crm.service.IServiceTask;
 
 @Controller
@@ -30,10 +31,14 @@ public class MessageController {
 	
 	@Autowired
 	private IServiceProject serviceProject;
+	
+	@Autowired
+	private IServiceSessionUser serviceSessionUser;
 
 	
 	@RequestMapping("/listMail")
 	public String pageMail(Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Message> listMessages = serviceMessage.readMessage();
 		ArrayList<Message> listMessagesSource = new ArrayList<Message>();
 		for(Message m :listMessages) {
@@ -49,6 +54,7 @@ public class MessageController {
 	
 	@RequestMapping("/messageAdd")
 	public String newMessage(@Valid Message message, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		message.setRead(false);
 		Date date = new Date();
 		message.setDate(date);
@@ -99,6 +105,7 @@ public class MessageController {
 	
 	@RequestMapping("/openMessage")
 	public String openMessage(@RequestParam(value = "ID") Long ID,Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Message> listMessagesReply = serviceMessage.getListReply(ID);
 		Message message = serviceMessage.readOneMessage(ID);
 		message.setRead(true);
@@ -110,6 +117,7 @@ public class MessageController {
 	
 	@RequestMapping(value ="/openMessagesProject",params="action=Old messages")
 	public String openMessagesProject(@RequestParam(value = "IDProject") Long ID,Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Message> listMessage = serviceMessage.readMessage();
 		ArrayList<Message> messagesOfProject = new ArrayList<Message>();
 		for(Message m :listMessage) {
@@ -124,14 +132,15 @@ public class MessageController {
 	
 	@RequestMapping(value ="/openMessagesProject",params="action=new messages")
 	public String creatNewMessageProject(@RequestParam(value = "IDProject") Long ID,Model model) {
-		//System.out.println(ID);
+		serviceSessionUser.getSessionUser(model);
 		Project project = serviceProject.readOneProject(ID);
 		model.addAttribute("project",project);
 		return "mail/newMailProject";
 	}
 	
 	@RequestMapping(value ="/newMessage")
-	public String creatMessage(@Valid Message message) {
+	public String creatMessage(@Valid Message message, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		message.setDate(new Date());
 		message.setRead(false);
 		if(message.getMessageSources()!= null) {

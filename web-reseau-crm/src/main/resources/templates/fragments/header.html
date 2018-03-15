@@ -17,17 +17,20 @@
     <nav class="navbar navbar-default custom-header" th:fragment="header">
         <div class="container-fluid">
             <div class="navbar-header"><a class="navbar-brand" href="/"> </a><button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
-            <div
-                class="collapse navbar-collapse" id="navbar-collapse">
+            <div class="collapse navbar-collapse" id="navbar-collapse" th:object="${sessionUser}">
                 <ul class="nav navbar-nav links">
-                    <li role="presentation"><a href="customers">Customers </a></li>
-                    <li role="presentation"><a href="employes">Employes </a></li>
+                	<li role="presentation"><a href="/">Home </a></li>
+                    <li role="presentation"><a href="customers" th:if="${sessionUser?.role} == 'ADMIN' ">Customers </a></li>
+                    <li role="presentation"><a href="employes" th:if="${sessionUser?.role} == 'ADMIN' ">Employes </a></li>
                     <li role="presentation"><a href="projects">Projects </a></li>
-                    <li role="presentation"><a href="/">Home </a></li>
-                    <li role="presentation"><a href="/">Files </a></li>
                     <li role="presentation"><a href="/listMail">Mail </a></li>
+                    <li role="presentation"><a href="/" th:if="${sessionUser?.role} == 'ADMIN' ">Files </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right"></ul>
+                <a th:inline="text" class="pull-right" th:text="${sessionUser?.name} + ',' + ${sessionUser?.firstName}"></a><br></br>
+                <form class="btn pull-right" th:action="@{/logout}">
+                	<input type="submit" value="Logout"/>
+                </form>
         </div>
         </div>
     </nav>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import fr.webreseau.crm.dao.IRepositoryEmploye;
 import fr.webreseau.crm.model.Employe;
 
@@ -38,8 +37,6 @@ public class ServiceEmploye implements IServiceEmploye{
 		dao.delete(ID);
 		
 	}
-	
-
 	
 
 }

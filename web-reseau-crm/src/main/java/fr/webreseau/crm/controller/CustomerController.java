@@ -15,6 +15,7 @@ import fr.webreseau.crm.model.Customer;
 import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.service.IServiceCustomer;
 import fr.webreseau.crm.service.IServiceProject;
+import fr.webreseau.crm.service.IServiceSessionUser;
 
 @Controller
 public class CustomerController {
@@ -25,16 +26,14 @@ public class CustomerController {
 	@Autowired
 	private IServiceProject serviceProject;
 	
-	/* affiche la page d'accueil */
-	@GetMapping("/")
-	public String pageWelcome() {
-		return "welcome";
-
-	}
+	@Autowired
+	private IServiceSessionUser serviceSessionUser;
+	
 	
 	//affichage de la page d'ajout client
 	@GetMapping("/addCustomer")
-	public String pageAddCustomer() {
+	public String pageAddCustomer(Model model ) {
+		serviceSessionUser.getSessionUser(model);
 		return "customers/addCustomer";
 
 	}
@@ -42,6 +41,7 @@ public class CustomerController {
 	//affichage de la page d'un client
 	@RequestMapping("/viewCustomer")
 	public String pageViewCustomer(@RequestParam(value = "ID") Long ID, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Customer> listCustomers = service.readCustomers();
 		ArrayList<Project> listProject = serviceProject.readProject();
 		ArrayList<Project> listCustomerProjects = new ArrayList<Project>() ;
@@ -63,6 +63,7 @@ public class CustomerController {
 	//affichage de la liste des clients
 	@GetMapping("/customers")
 	public String pageCustomer(Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Customer> listCustomers = service.readCustomers();
 		model.addAttribute("listCustomers", listCustomers);
 		return "customers/customers";
@@ -72,6 +73,7 @@ public class CustomerController {
 	/* Ajout d'un cleint */
 	@PostMapping("/customerAdd")
 	public String customerAdd(@Valid Customer customer) {
+		customer.setRole("USER");
 		service.creatCustomer(customer);
 
 		return "redirect:/customers";
@@ -80,6 +82,7 @@ public class CustomerController {
 	//affichage de la page edition d'un client
 	@RequestMapping("/editCustomer")
 	public String editCustomer(@RequestParam(value = "ID") Long ID, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Customer> listCustomers = service.readCustomers();
 		for (Customer c : listCustomers) {
 			if (ID == c.getID()) {
@@ -93,6 +96,7 @@ public class CustomerController {
 	//enregistrement de l'edition d'un client
 	@RequestMapping("/customerModify")
 	public String modifyCustomer(@Valid Customer customer) {
+		customer.setRole("USER");
 		service.modifyCustomer(customer);
 		return "customers/viewCustomer";
 	}
@@ -101,6 +105,7 @@ public class CustomerController {
 	//recuperation de l'id du client pour creer un projet lié au client
 	@GetMapping("/addProject{id}")
 	public String addProjectCustomer(@RequestParam("id") Long ID, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Customer> listCustomers = service.readCustomers();
 		for (Customer c : listCustomers) {
 			if (ID == c.getID()) {

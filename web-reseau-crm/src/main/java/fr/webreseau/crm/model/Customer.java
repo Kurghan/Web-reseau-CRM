@@ -15,8 +15,8 @@ public class Customer extends Person {
 
 
 	public Customer(Long iD, String name, String firstName, String mail, String password, String phone, String address,
-			String city, String country, String nSiret, String companyName, Project project) {
-		super(iD, name, firstName, mail, password, phone, address, city, country);
+			String city, String country, String role, String nSiret, String companyName) {
+		super(iD, name, firstName, mail, password, phone, address, city, country, role);
 		this.nSiret = nSiret;
 		this.companyName = companyName;
 	}

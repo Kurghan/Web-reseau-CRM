@@ -1,6 +1,9 @@
 package fr.webreseau.crm.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.model.ProjectTask;
 import fr.webreseau.crm.service.IServiceMessage;
 import fr.webreseau.crm.service.IServiceProject;
+import fr.webreseau.crm.service.IServiceSessionUser;
 import fr.webreseau.crm.service.IServiceTask;
 
 @Controller
@@ -27,10 +31,24 @@ public class ProjectController {
 
 	@Autowired
 	private IServiceMessage serviceMessage;
+	
+	@Autowired
+	private IServiceSessionUser serviceSessionUser;
 
 	@GetMapping("/projects")
-	public String pageProject(Model model) {
+	public String pageProject(Model model , Principal principal) {
 		ArrayList<Project> listProjects = service.readProject();
+		ArrayList<Project> listProjectsUser = new ArrayList<Project>();
+		serviceSessionUser.getSessionUser(model);
+		for(Project p : listProjects) {
+			if(p.getCustomer().getMail().equals(principal.getName())) {
+				listProjectsUser.add(p);
+				Collections.reverse(listProjectsUser);
+				model.addAttribute("listProjectsUser", listProjectsUser);
+			}
+					
+		}
+		Collections.reverse(listProjects);
 		model.addAttribute("listProjects", listProjects);
 		return "projects/projects";
 
@@ -39,6 +57,7 @@ public class ProjectController {
 	// page de vue d'un projet
 	@RequestMapping("/viewProject")
 	public String pageViewProject(@RequestParam(value = "ID") Long ID, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<Project> listProject = service.readProject();
 		ArrayList<ProjectTask> listTask = serviceTask.readTasks();
 		for (Project p : listProject) {
@@ -69,6 +88,7 @@ public class ProjectController {
 
 	@RequestMapping("/editProject")
 	public String pageModifyProject(@Valid Project project, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		service.modifyProject(project);
 		return "forward:/viewProject";
 	}
