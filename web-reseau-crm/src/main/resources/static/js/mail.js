@@ -19,7 +19,7 @@ function viewTab(){
 	}
 	catch(error) {
 		//alert("vide");
-		document.getElementById("listReply").style.visibility="hidden";
+		document.getElementById("listReply").style.display="none";
 	}
 	
 	

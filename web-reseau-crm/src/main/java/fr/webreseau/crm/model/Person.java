@@ -24,8 +24,9 @@ public abstract class Person {
 	private String city;
 	private String country;
 	private String role;
+	private boolean enable;
 	
-	public Person(Long iD, String name, String firstName, String mail, String password, String phone, String address, String city, String country,String role) {
+	public Person(Long iD, String name, String firstName, String mail, String password, String phone, String address, String city, String country,String role,boolean enable) {
 		super();
 		ID = iD;
 		this.name = name;
@@ -37,6 +38,7 @@ public abstract class Person {
 		this.city = city;
 		this.country = country;
 		this.role = role;
+		this.enable = enable;
 	}
 	
 	public Person() {}
@@ -137,6 +139,14 @@ public abstract class Person {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 
 	@Override
 	public String toString() {
@@ -144,6 +154,8 @@ public abstract class Person {
 				+ password + ", phone=" + phone + ", address=" + address + ", city=" + city + ", country=" + country
 				+ ", role=" + role + "]";
 	}
+
+
 
 	
 	

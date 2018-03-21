@@ -20,7 +20,6 @@ public interface IServiceMessage {
 	
 	public ArrayList<Message> getMessageListOfProject(Long ID , Model model);
 	
-	public ArrayList<Message> getListReply(Long ID);
+	public void getAllMessageByIDSources(Long ID , Model model);
 	
-	//public ArrayList<Message> getReplyOfMessage(Long IDMessage ,Model model);
 }

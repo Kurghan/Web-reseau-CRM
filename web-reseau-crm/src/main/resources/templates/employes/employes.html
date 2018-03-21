@@ -19,39 +19,7 @@
 			</div>
 			<span class="counter pull-right"></span>
 			<form action="#" th:action="@{/viewEmploye}" th:object="${employe}" method="post">
-			<table class="table table-hover table-bordered results" id="employeTable">
-				<thead>
-					<tr>
-						<th class="col-md-1 col-xs-1" id="IDEmploye">ID</th>
-						<th class="col-md-1 col-xs-1">Name</th>
-						<th class="col-md-1 col-xs-1">Firstname</th>
-						<th class="col-md-1 col-xs-1">Fonction</th>
-						<th class="col-md-2 col-xs-2">Address</th>
-						<th class="col-md-1 col-xs-1">city</th>
-						<th class="col-md-1 col-xs-1">Country</th>
-						<th class="col-md-1 col-xs-1">Téléphone</th>
-						<th class="col-md-1 col-xs-1">Mail</th>
-						<th class="col-md-1 col-xs-1">Edit</th>
-					</tr>
-					<tr class="warning no-result">
-						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
-					</tr>
-				</thead>
-				<tbody th:each="employe : ${listEmploye}">
-					<tr>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.ID}" id="IDEmploye"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.name}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.firstName}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.fonction}"></th>
-						<th class="col-md-2 col-xs-2 tableInfo"	th:text="${employe.address}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.city}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.country}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.phone}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.mail}" id="mail"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"><button type="submit" th:value="${employe.ID}" name="ID" class="button">View</button></th>
-					</tr>
-				</tbody>
-			</table>
+			<div th:replace="fragments/tableEmployes :: tableEmployes"></div>
 			</form>
 		</div>
 	</div>

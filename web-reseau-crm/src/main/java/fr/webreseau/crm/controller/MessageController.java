@@ -1,5 +1,6 @@
 package fr.webreseau.crm.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -37,18 +38,25 @@ public class MessageController {
 
 	
 	@RequestMapping("/listMail")
-	public String pageMail(Model model) {
+	public String pageMail(Model model , Principal principal) {
 		serviceSessionUser.getSessionUser(model);
 		ArrayList<Message> listMessages = serviceMessage.readMessage();
 		ArrayList<Message> listMessagesSource = new ArrayList<Message>();
+		ArrayList<Message> listMessagesSourceUser = new ArrayList<Message>();
 		for(Message m :listMessages) {
 			if(m.getMessageSources() == null) {
 			listMessagesSource.add(m);
 			}
 		}
+		for(Message m : listMessagesSource) {
+			if(m.getCustomer().getMail().equals(principal.getName())){
+				listMessagesSourceUser.add(m);
+				Collections.reverse(listMessagesSourceUser);
+				model.addAttribute("messagesUser", listMessagesSourceUser);
+			}
+		}
 		Collections.reverse(listMessagesSource);
 		model.addAttribute("messages",listMessagesSource);
-		//System.out.println(listMessagesSource);
 		return "mail/listMail";
 	}
 	
@@ -84,34 +92,15 @@ public class MessageController {
 		return "forward:/viewProject";
 	}
 	
-	/*@RequestMapping("/messageReply")
-	public String messageReply(@RequestParam(value = "IDmessageReply") Long ID,@RequestParam(value="messageReply") String text ) {
-		Message message = serviceMessage.readOneMessage(ID);
-		Message messageReply =  new Message();
-		Date date = new Date();
-		messageReply.setDate(date);
-		messageReply.setMessageSources(ID);
-		messageReply.setCustomer(message.getCustomer());
-		messageReply.setProject(message.getProject());
-		messageReply.setRead(false);
-		messageReply.setMessageContent(text);
-		messageReply.setTitle(message.getTitle());
-		message.setNbReply(message.getNbReply() + 1);
-		message.setRead(true);
-		serviceMessage.creatMessage(messageReply);
-		serviceMessage.creatMessage(message);
-		return "forward:/viewProject";
-	}*/
 	
 	@RequestMapping("/openMessage")
-	public String openMessage(@RequestParam(value = "ID") Long ID,Model model) {
+	public String openMessage(@RequestParam(value = "ID") Long ID,Model model)  {
 		serviceSessionUser.getSessionUser(model);
-		ArrayList<Message> listMessagesReply = serviceMessage.getListReply(ID);
 		Message message = serviceMessage.readOneMessage(ID);
 		message.setRead(true);
 		serviceMessage.creatMessage(message);
 		model.addAttribute("message",message);
-		model.addAttribute("messagesReply",listMessagesReply);
+		serviceMessage.getAllMessageByIDSources(ID,model);
 		return "mail/mail";
 	}
 	

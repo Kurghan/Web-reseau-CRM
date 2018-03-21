@@ -14,6 +14,7 @@ import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.model.ProjectTask;
 import fr.webreseau.crm.service.IServiceMessage;
 import fr.webreseau.crm.service.IServiceProject;
+import fr.webreseau.crm.service.IServiceSessionUser;
 import fr.webreseau.crm.service.IServiceTask;
 
 @Controller
@@ -27,19 +28,26 @@ public class TaskController {
 	
 	@Autowired
 	private IServiceMessage serviceMessage;
+	
+	@Autowired
+	private IServiceSessionUser serviceSessionUser;
 
 	@RequestMapping("/taskAdd")
 	public String AddTaskToProject(@Valid ProjectTask projectTask, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		Long ID = projectTask.getProject().getID();
 		Project project = serviceProject.readOneProject(ID);
 		model.addAttribute("project", project);
 		serviceTask.creatTask(projectTask);
 		serviceMessage.getMessageListOfProject(ID, model);
+		serviceTask.percentTask(ID, model);
+		serviceProject.dayRest(ID, model);
 		return taskOfProject(model, ID);
 	}
 
 	@RequestMapping("/taskEdit")
 	public String editTaskToProject(@Valid ProjectTask projectTask, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ArrayList<ProjectTask> taskList = serviceTask.readTasks();
 		for (ProjectTask p : taskList) {
 			if (p.getID() == projectTask.getID()) {
@@ -51,7 +59,10 @@ public class TaskController {
 		Project project = serviceProject.readOneProject(ID);
 		model.addAttribute("project", project);
 		serviceMessage.getMessageListOfProject(ID, model);
-		return taskOfProject(model, ID);
+		taskOfProject(model, ID);
+		serviceTask.percentTask(ID, model);
+		serviceProject.dayRest(ID, model);
+		return "projects/viewProject";
 	}
 
 	// recuperation des tasks d'un projet
@@ -71,13 +82,15 @@ public class TaskController {
 	// suppression d'un tache dans le projet
 	@RequestMapping("/taskDelete")
 	private String taskToDelete(@RequestParam(value = "ID") Long IDTask, Model model) {
+		serviceSessionUser.getSessionUser(model);
 		ProjectTask task = serviceTask.readOneTask(IDTask);
 		Long ID = task.getProject().getID();
 		Project project = serviceProject.readOneProject(ID);
 		model.addAttribute("project", project);
 		serviceTask.deleteTask(IDTask);
 		serviceMessage.getMessageListOfProject(ID, model);
-		
+		serviceTask.percentTask(ID, model);
+		serviceProject.dayRest(ID, model);
 		return taskOfProject(model, ID);
 
 	}

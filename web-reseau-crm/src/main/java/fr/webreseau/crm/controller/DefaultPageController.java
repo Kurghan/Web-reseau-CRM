@@ -17,7 +17,7 @@ public class DefaultPageController {
 	@GetMapping("/")
 	public String pageWelcome(Model model) {
 		serviceUser.getSessionUser(model);
-		return "welcome";
+		return "redirect:/projects";
 	}
 
 	@GetMapping("/login")

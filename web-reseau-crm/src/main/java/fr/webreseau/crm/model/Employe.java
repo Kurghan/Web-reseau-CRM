@@ -15,8 +15,8 @@ public class Employe extends Person{
 
 
 	public Employe(Long iD, String name, String firstName, String mail, String password, String phone, String address,
-			String city, String country, String role, String fonction) {
-		super(iD, name, firstName, mail, password, phone, address, city, country, role);
+			String city, String country, String role, String fonction,boolean enable) {
+		super(iD, name, firstName, mail, password, phone, address, city, country, role,enable);
 		this.fonction = fonction;
 	}
 

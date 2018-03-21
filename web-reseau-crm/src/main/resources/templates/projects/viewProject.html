@@ -5,31 +5,41 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>View project</title>
-
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
 	<div th:replace="fragments/modalEditProject :: modalEditProject"></div>
-	<h2 id="titleProject" th:object="${project}">
-		<span th:text="${project.name}"></span> <input type="image"	value="edit" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="EditProject" data-toggle="modal" data-target="#myModalEditProject" />
-	</h2>
-	<h3 id="titleCustomerProject">
-		<span
-			th:text="${project.customer.name} +' , '+ ${project.customer.firstName}"></span>
-	</h3>
-	<input type="hidden" th:value="${project.customer.ID}" id="IDCustomerForMessage" />
-	<input type="hidden" th:value="${project.ID}" id="IDProjectForMessage" />
-	<div class="col-md-12 col-lg-6">
-		<div th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}" class="pull-left" style="margin-right: 2px;"></div>
-		<div th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}" class="pull-right" style="margin-left: 2px;"></div>
-		<div class="progress beautiful" style="margin-left: 2%;">
-			<div class="progress-bar progress-bar-striped active"
-				aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-				<span class="sr-only">80%</span>
+	<div class="col">
+		<div class="container">
+			<div class="col-sm-12 col-md-6 pull-right">
+			<div id="bar"></div>
+			<input type="hidden" id="valueBar" th:value="${nbPercent}" />
+			</div>
+			<div class="col-sm-12 col-md-6">
+			<h2 id="titleProject" th:object="${project}">
+				<span th:text="${project.name}"></span> 
+				<input th:if="${sessionUser?.role} == 'ADMIN' " type="image" value="edit" src="img/stylo2.png" style="width: 20px; margin-left: 20px;"
+						th:value="EditProject" data-toggle="modal" data-target="#myModalEditProject" />
+			</h2>
+			<h3 id="titleCustomerProject">
+				<span
+					th:text="${project.customer.name} +' , '+ ${project.customer.firstName}"></span>
+			</h3>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-12"></div>
+	<input type="hidden" th:value="${project.customer.ID}" id="IDCustomerForMessage" />
+	<input type="hidden" th:value="${project.ID}" id="IDProjectForMessage" />
+	<div class="row">
+	<div class="col-md-12 col-lg-6">
+		<div class="col-lg-2" th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}"></div>
+		<div class="col-lg-8" ><progress class="progressBarProject" id="avancement" th:value="${percentRest}" max="100"></progress></div>
+		<div class="col-lg-2 deadLine" th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}"></div>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-lg-6" ><div class="remainingDays" th:text="'remaining days : ' + ${nbRest}">test</div></div>
+	</div>
 	<div class="highlight-phone" style="margin-bottom: 20px;">
 		<div class="container">
 			<div class="row">
@@ -41,71 +51,78 @@
 			</div>
 		</div>
 	</div>
+	<span id="lastMessage">last message</span>
 	<div>
 		<div th:replace="fragments/modalAddTask :: modalAddTask"></div>
 		<div th:replace="fragments/modalTask :: modal"></div>
 		<div th:replace="fragments/modalAlert :: modalAlert"></div>
 		<div class="row">
-			<div class="col-sm-6">
-				<button type="button" class="btn btnTask" data-toggle="modal" data-target="#myModal">add task</button>
-				<table class="table table-hover table-bordered results tasksTable" id="tasksTable">
+					<div class="col-sm-6 tableTask">
+				<table class="col-md-12 table-bordered table-striped table-condensed cf" id="tasksTable">
 					<thead>
 						<tr>
-							<th class="col-md-3 col-xs-3">Name</th>
-							<th class="col-md-1 col-xs-1">%</th>
-							<th class="col-md-7 col-xs-7">Comment</th>
-							<th class="col-md-1 col-xs-1">Edit</th>
+							<th >Name</th>
+							<th >%</th>
+							<th >Comment</th>
+							<th th:if="${sessionUser?.role} == 'ADMIN' ">Edit</th>
 						</tr>
 					</thead>
 					<tbody th:each="task : ${tasks}">
 						<tr>
-							<th class="col-md-3 col-xs-3 tableInfo" th:text="${task?.name}"></th>
-							<th class="col-md-1 col-xs-1 tableInfo"	th:text="${task?.progress}"></th>
-							<th class="col-md-7 col-xs-7 tableInfo"	th:text="${task?.comment}"></th>
-							<th><input type="image" value="edit" src="img/stylo2.png" style="width: 20px; margin-left: 20px;" th:value="Edit" data-toggle="modal" data-target="#myModalEdit" onclick="getTask(this)" /></th>
-							<th><input type="image" value="delete" src="img/delete.png"	style="width: 20px; margin-left: 20px;" data-toggle="modal"	data-target="#myModalAlert" th:onclick="'javascript:getTaskToDelete(' + ${task.ID}+ ')'" />
-							</th><th class="col-md-7 col-xs-7 tableInfo" th:text="${task?.ID}" style="visibility: hidden;"></th>
+							<th th:text="${task?.name}"></th>
+							<th th:text="${task?.progress}"></th>
+							<th th:text="${task?.comment}"></th>
+							<th th:if="${sessionUser?.role} == 'ADMIN' "><input	type="image" value="edit" src="img/stylo2.png"
+								style="width: 20px; margin-left: 20px;" th:value="Edit"	data-toggle="modal" data-target="#myModalEdit"
+								onclick="getTask(this)" /></th>
+							<th th:if="${sessionUser?.role} == 'ADMIN' "><input	type="image" value="delete" src="img/delete.png"
+								style="width: 20px; margin-left: 20px;" data-toggle="modal"	data-target="#myModalAlert"
+								th:onclick="'javascript:getTaskToDelete(' + ${task.ID}+ ')'" /></th>
+							<th th:text="${task?.ID}" style="display: none;"></th>
 						</tr>
 					</tbody>
 				</table>
+				<button th:if="${sessionUser?.role} == 'ADMIN' " type="button"
+					class="btn btnTask" data-toggle="modal" data-target="#myModal">add task</button>
 			</div>
 			<div class="col-sm-6 messages-project">
-				<span id="lastMessage">last message</span>
-				<form action="#" th:action="@{/openMessage}" method="post" id="formMessage">
-				<input type="hidden" id="IDmessageForm" name="ID"/>
-				<table class="table table-hover table-bordered messsages-table"	id="messageTable">
-					<thead>
-						<tr>
-							<th class="col-md-3 col-xs-3">title</th>
-							<th class="col-md-2 col-xs-2">date</th>
-							<th class="col-md-7 col-xs-7">message</th>
-							<th class="col-md-7 col-xs-7">Lu</th>
-							<th class="col-md-1 col-xs-1">reply</th>
-						</tr>
-					</thead>
-					<tbody th:each="message,iterStat : ${messages}" th:if="${iterStat.index >= iterStat.size-1}" th:onclick="'javascript:getIdMessage(this);'">
-						<tr >
-							<th class="col-md-3 col-xs-3 tableInfo" th:text="${#strings.abbreviate(message?.title,25)}"></th>
-							<th class="col-md-2 col-xs-2 tableInfo" th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
-							<th class="col-md-6 col-xs-7 tableInfo"	th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
-							<th class="col-md-1 col-xs-1 tableInfo"	th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
-							<th class="col-md-1 col-xs-1 tableInfo"	th:text="${message?.nbReply}" ></th>
-							<th th:text="${message?.iDMessage}" style="visibility: hidden;"></th>
-						</tr>
-					</tbody>
-				</table>
+				<form action="#" th:action="@{/openMessage}" method="post"
+					id="formMessage">
+					<input type="hidden" id="IDmessageForm" name="ID" />
+					<table class="col-md-12 table-bordered table-striped table-condensed cf"	id="messageTable">
+						<thead>
+							<tr>
+								<th >title</th>
+								<th >date</th>
+								<th >message</th>
+								<th >Lu</th>
+								<th >reply</th>
+							</tr>
+						</thead>
+						<tbody th:each="message,iterStat : ${messages}"	th:if="${iterStat.index >= iterStat.size-1}" th:onclick="'javascript:getIdMessage(this);'">
+							<tr>
+								<th	th:text="${#strings.abbreviate(message?.title,25)}"></th>
+								<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
+								<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
+								<th th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
+								<th th:text="${message?.nbReply}"></th>
+								<th th:text="${message?.iDMessage}" style="display : none;"></th>
+							</tr>
+						</tbody>
+					</table>
 				</form>
 				<form action="#" th:action="@{/openMessagesProject}" method="post">
-				<input type="hidden" name="ID" id="IDMessageProject"/>
-				<input type="submit" class="btn btn-history" value ="Old messages" name="action"/>
-				<input type="submit" class="btn btn-history" value ="new messages" name="action"/>
-				<input type="hidden" th:value="${project.ID}" id="IDProject" name="IDProject"/>
+					<input type="hidden" name="ID" id="IDMessageProject" />
+					<input class="btnMessageProject btn btn-history" type="submit" value="Old messages" name="action" />
+					<input class="btnMessageProject btn btn-history" type="submit" value="new messages" name="action" />
+					<input type="hidden" th:value="${project.ID}" id="IDProject" name="IDProject" />
 				</form>
 			</div>
 		</div>
 	</div>
 	<script src="js/viewProject.js" type='text/javascript' charset="utf-8"></script>
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/radialprogress.js"></script>
 </body>
 </html>

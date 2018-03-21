@@ -1,7 +1,6 @@
 package fr.webreseau.crm.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,21 +52,19 @@ public class ServiceMessage implements IServiceMessage {
 				messagesOfProject.add(m);
 			}
 		}
-		//Collections.reverse(messagesOfProject);
 		model.addAttribute("messages", messagesOfProject);
 		
 		return messagesOfProject;
 	}
 	
-	public ArrayList<Message> getListReply(Long ID){
-		ArrayList<Message> listMessages = (ArrayList<Message>) dao.findAll();
-		ArrayList<Message> listMessagesReply = new ArrayList<Message>();
-		for(Message m : listMessages) {
-			if (m.getMessageSources() == ID) {
-				listMessagesReply.add(m);
+	public void getAllMessageByIDSources(Long ID , Model model) {
+		ArrayList<Message> listMessageSources = (ArrayList<Message>) dao.findAll();
+		ArrayList<Message> listMessageUser = new ArrayList<Message>();
+		for(int i = 0;i<listMessageSources.size();i++) {
+			if(ID.equals(listMessageSources.get(i).getMessageSources())) {
+				listMessageUser.add(listMessageSources.get(i));
 			}
 		}
-		Collections.reverse(listMessagesReply);
-		return listMessagesReply;
-	}
+		model.addAttribute("messagesReply", listMessageUser);
+		}
 }

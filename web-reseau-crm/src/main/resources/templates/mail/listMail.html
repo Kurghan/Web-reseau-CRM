@@ -12,31 +12,7 @@
 					<input type="text" class="search form-control" placeholder="What you looking for?" />
 				</div>
 				<form action="#" th:action="@{/openMessage}" name="action">
-					<table class="table table-hover table-bordered results"	id="messageTable">
-						<thead>
-							<tr>
-								<th class="col-md-2 col-xs-2">title </th>
-								<th class="col-md-1 col-xs-1">date </th>
-								<th class="col-md-4 col-xs-4">message </th>
-								<th class="col-md-1 col-xs-1">Lu </th>
-								<th class="col-md-2 col-xs-2">Customer </th>
-								<th class="col-md-2 col-xs-2">Project </th>
-								<th class="col-md-1 col-xs-1">reply </th>
-							</tr>
-						</thead>
-						<tbody th:each="message : ${messages}" th:onclick="'javascript:openMessage(' + ${message?.iDMessage}+ ')'">
-							<tr>
-								<th class="col-md-2 col-xs-2 tableInfo"	th:text="${message?.title}"></th>
-								<th class="col-md-1 col-xs-1 tableInfo"	th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
-								<th class="col-md-4 col-xs-4 tableInfo"	th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
-								<th class="col-md-1 col-xs-1 tableInfo"	th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
-								<th class="col-md-2 col-xs-2 tableInfo"	th:text="${message?.customer.name}"></th>
-								<th class="col-md-2 col-xs-2 tableInfo"	th:text="${message?.project.name}"></th>
-								<th class="col-md-1 col-xs-1 tableInfo"	th:text="${message?.nbReply}"></th>
-								<th th:text="${message?.iDMessage}" style="display : none;"></th>
-							</tr>
-						</tbody>
-					</table>
+				<div th:replace="fragments/tableMessages :: tableMessages"></div>
 					<input type="hidden" ID="ID" name="ID"/>
 				</form>
 			</div>
