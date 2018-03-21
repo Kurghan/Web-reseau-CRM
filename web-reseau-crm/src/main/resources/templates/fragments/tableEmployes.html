@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="tableEmployes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>table</title>
+</head>
+
+<body>
+    <div class="" th:fragment="tableEmployes">
+    <div class="row">
+        <div class="col-md-12">
+        
+        </div>
+        <div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf results">
+            <thead>
+					<tr>
+						<th id="IDEmploye">ID</th>
+						<th >Name</th>
+						<th >Firstname</th>
+						<th >Fonction</th>
+						<th >Address</th>
+						<th >city</th>
+						<th >Country</th>
+						<th >Téléphone</th>
+						<th >Mail</th>
+						<th >Edit</th>
+					</tr>
+					<tr class="warning no-result">
+						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+					</tr>
+				</thead>
+				<tbody th:each="employe : ${listEmploye}">
+					<tr>
+						<th th:text="${employe.ID}" id="IDEmploye"></th>
+						<th th:text="${employe.name}"></th>
+						<th th:text="${employe.firstName}"></th>
+						<th th:text="${employe.fonction}"></th>
+						<th th:text="${employe.address}"></th>
+						<th th:text="${employe.city}"></th>
+						<th th:text="${employe.country}"></th>
+						<th th:text="${employe.phone}"></th>
+						<th th:text="${employe.mail}" id="mail"></th>
+						<th ><button type="submit" th:value="${employe.ID}" name="ID" class="button">View</button></th>
+					</tr>
+				</tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

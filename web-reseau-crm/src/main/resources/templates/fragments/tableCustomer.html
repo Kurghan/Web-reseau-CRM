@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="tableCustomer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>table</title>
+</head>
+
+<body>
+    <div class="" th:fragment="tableCustomer">
+    <div class="row">
+        <div class="col-md-12">
+        
+        </div>
+        <div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf results">
+            				<thead>
+					<tr>
+						<th id="IDCustomer">ID</th>
+						<th >Name</th>
+						<th >Firstname</th>
+						<th >Company Name</th>
+						<th >Address</th>
+						<th >city</th>
+						<th >Country</th>
+						<th >Téléphone</th>
+						<th >Mail</th>
+						<th >n°Siret</th>
+						<th ></th>
+					</tr>
+					<tr class="warning no-result">
+						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+					</tr>
+				</thead>
+				<tbody th:each="customer : ${listCustomers}">
+					<tr>
+						<th th:text="${customer.ID}" id="IDCustomer"></th>
+						<th th:text="${customer.name}"></th>
+						<th th:text="${customer.firstName}"></th>
+						<th th:text="${customer.companyName}"></th>
+						<th th:text="${customer.address}"></th>
+						<th th:text="${customer.city}"></th>
+						<th th:text="${customer.country}"></th>
+						<th th:text="${customer.phone}"></th>
+						<th th:text="${customer.mail}"></th>
+						<th th:text="${customer.nSiret}"></th>
+						<th class="col-md-1 col-xs-12"><button type="submit" th:value="${customer.ID}" name="ID" class="button">View</button></th>
+					</tr>
+				</tbody>
+            
+            
+            </table>
+        </div>
+    </div>
+</div>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

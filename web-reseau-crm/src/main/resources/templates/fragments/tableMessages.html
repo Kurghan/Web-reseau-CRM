@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="tableMessages">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>table</title>
+</head>
+
+<body>
+    <div class="" th:fragment="tableMessages">
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+        <div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf results">
+            <thead th:if="${sessionUser?.role} == 'ADMIN' ">
+							<tr>
+								<th>title </th>
+								<th>date </th>
+								<th>message </th>
+								<th>Lu </th>
+								<th>Customer </th>
+								<th>Project </th>
+								<th>reply </th>
+							</tr>
+						</thead>
+						<tbody th:if="${sessionUser?.role} == 'ADMIN' " th:each="message : ${messages}" th:onclick="'javascript:openMessage(' + ${message?.iDMessage}+ ')'">
+							<tr>
+								<th th:text="${message?.title}"></th>
+								<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
+								<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
+								<th th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
+								<th th:text="${message?.customer.name}"></th>
+								<th th:text="${message?.project.name}"></th>
+								<th th:text="${message?.nbReply}"></th>
+								<th style="display : none;"></th>
+							</tr>
+						</tbody>
+					</table>
+					<table class="col-md-12 table-bordered table-striped table-condensed cf results">
+						<thead th:if="${sessionUser?.role} == 'USER' ">
+							<tr>
+								<th >title </th>
+								<th >date </th>
+								<th >message </th>
+								<th >Lu </th>
+								<th >Customer </th>
+								<th >Project </th>
+								<th >reply </th>
+							</tr>
+						</thead>
+						<tbody th:if="${sessionUser?.role} == 'USER' " th:each="message : ${messagesUser}" th:onclick="'javascript:openMessage(' + ${message?.iDMessage}+ ')'">
+							<tr>
+								<th th:text="${message?.title}"></th>
+								<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
+								<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
+								<th th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
+								<th th:text="${message?.customer.name}"></th>
+								<th th:text="${message?.project.name}"></th>
+								<th th:text="${message?.nbReply}"></th>
+								<th th:text="${message?.iDMessage}" style="display : none;"></th>
+							</tr>
+						</tbody>
+			</table>
+        </div>
+    </div>
+</div>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

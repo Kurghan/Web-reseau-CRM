@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="tableProjects">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>table</title>
+</head>
+
+<body>
+    <div class="" th:fragment="tableProjects">
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+        <div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf results">
+				<thead th:if="${sessionUser?.role} == 'ADMIN' ">
+					<tr>
+						<th >Customer</th>
+						<th >Project Name </th>
+						<th >Description</th>
+						<th >Start date</th>
+						<th >End date</th>
+						<th >View</th>
+					</tr>
+					<tr class="warning no-result">
+						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+					</tr>
+				</thead>
+				<tbody th:if="${sessionUser?.role} == 'ADMIN' " th:each="project: ${listProjects}">
+					<tr>
+						<th th:text="${project.customer.name} +' '+ ${project.customer.firstName}"></th>
+						<th th:text="${project.name}"></th>
+						<th th:text="${#strings.abbreviate(project.description,50)}"></th>
+						<th th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}"></th>
+						<th th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}"></th>
+						<th ><button type="submit" th:value="${project.ID}" name="ID" class="button">View</button></th>
+					</tr>
+				</tbody>
+			</table>
+			<table class="col-md-12 table-bordered table-striped table-condensed cf results">
+				<thead th:if="${sessionUser?.role} == 'USER' ">
+					<tr>
+						<th >Customer</th>
+						<th >Project Name </th>
+						<th >Description</th>
+						<th >Start date</th>
+						<th >End date</th>
+						<th >View</th>
+					</tr>
+					<tr class="warning no-result">
+						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+					</tr>
+				</thead>
+				<tbody th:if="${sessionUser?.role} == 'USER' " th:each="project: ${listProjectsUser}">
+					<tr>
+						<th th:text="${project.customer.name} +' '+ ${project.customer.firstName}"></th>
+						<th th:text="${project.name}"></th>
+						<th th:text="${#strings.abbreviate(project.description,50)}"></th>
+						<th th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}"></th>
+						<th th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}"></th>
+						<th ><button type="submit" th:value="${project.ID}" name="ID" class="button">View</button></th>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+    </div>
+</div>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
