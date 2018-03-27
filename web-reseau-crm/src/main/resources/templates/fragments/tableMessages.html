@@ -15,13 +15,13 @@
             <table class="col-md-12 table-bordered table-striped table-condensed cf results">
             <thead th:if="${sessionUser?.role} == 'ADMIN' ">
 							<tr>
-								<th>title </th>
-								<th>date </th>
-								<th>message </th>
-								<th>Lu </th>
-								<th>Customer </th>
-								<th>Project </th>
-								<th>reply </th>
+								<th th:text="#{message.title}" >title </th>
+								<th th:text="#{message.date}" >date </th>
+								<th th:text="#{message.message}" >message </th>
+								<th th:text="#{message.read}" >Lu </th>
+								<th th:text="#{message.customer}" >Customer </th>
+								<th th:text="#{message.project}" >Project </th>
+								<th th:text="#{message.reply}" >reply </th>
 							</tr>
 						</thead>
 						<tbody th:if="${sessionUser?.role} == 'ADMIN' " th:each="message : ${messages}" th:onclick="'javascript:openMessage(' + ${message?.iDMessage}+ ')'">
@@ -29,7 +29,7 @@
 								<th th:text="${message?.title}"></th>
 								<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
 								<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
-								<th th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
+								<th th:switch="${message?.read}"><span th:case="false" th:text="#{asReadNo}"></span><span th:case="true" th:text="#{asReadYes}"></span></th>
 								<th th:text="${message?.customer.name}"></th>
 								<th th:text="${message?.project.name}"></th>
 								<th th:text="${message?.nbReply}"></th>
@@ -40,13 +40,13 @@
 					<table class="col-md-12 table-bordered table-striped table-condensed cf results">
 						<thead th:if="${sessionUser?.role} == 'USER' ">
 							<tr>
-								<th >title </th>
-								<th >date </th>
-								<th >message </th>
-								<th >Lu </th>
-								<th >Customer </th>
-								<th >Project </th>
-								<th >reply </th>
+								<th th:text="#{message.title}" >title </th>
+								<th th:text="#{message.date}" >date </th>
+								<th th:text="#{message.message}" >message </th>
+								<th th:text="#{message.read}" >Lu </th>
+								<th th:text="#{message.customer}" >Customer </th>
+								<th th:text="#{message.project}" >Project </th>
+								<th th:text="#{message.reply}" >reply </th>
 							</tr>
 						</thead>
 						<tbody th:if="${sessionUser?.role} == 'USER' " th:each="message : ${messagesUser}" th:onclick="'javascript:openMessage(' + ${message?.iDMessage}+ ')'">
@@ -54,7 +54,7 @@
 								<th th:text="${message?.title}"></th>
 								<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
 								<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
-								<th th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
+								<th th:switch="${message?.read}"><span th:case="false" th:text="#{asReadNo}"></span><span th:case="true" th:text="#{asReadYes}"></span></th>
 								<th th:text="${message?.customer.name}"></th>
 								<th th:text="${message?.project.name}"></th>
 								<th th:text="${message?.nbReply}"></th>

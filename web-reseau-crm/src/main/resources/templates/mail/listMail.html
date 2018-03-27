@@ -5,12 +5,15 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-		<h1 id="title">All messages</h1>
+		<h1 id="title" th:text="#{mail.title}">All messages</h1>
 		<div class="container">
 			<div class="intro">
-				<div class="form-group" id="find">
-					<input type="text" class="search form-control" placeholder="What you looking for?" />
+			<div class="row form-group">
+				<div class="col-xs-12 col-sm-4 col-lg-2 pull-right">
+				<input type="text" class="search form-control"
+					th:placeholder="#{placeholder}" />
 				</div>
+			</div>
 				<form action="#" th:action="@{/openMessage}" name="action">
 				<div th:replace="fragments/tableMessages :: tableMessages"></div>
 					<input type="hidden" ID="ID" name="ID"/>

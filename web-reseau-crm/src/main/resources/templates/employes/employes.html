@@ -11,11 +11,13 @@
 	<div th:replace="fragments/header :: header"></div>
 	<div class="container">
 		<div class="intro">
-			<h2 id="title">Employes</h2>
-			<div id="addTitle" role="presentation"><a href="addEmploye">Add</a></div>
-			<div class="form-group" id="find">
+			<h2 id="title" th:text="#{employe.title}">Employes</h2>
+			<div id="addTitle" role="presentation"><a href="addEmploye" th:text="#{employe.add}">Add</a></div>
+			<div class="row form-group">
+				<div class="col-xs-12 col-sm-4 col-lg-2 pull-right">
 				<input type="text" class="search form-control"
-					placeholder="What you looking for?" />
+					th:placeholder="#{placeholder}" />
+				</div>
 			</div>
 			<span class="counter pull-right"></span>
 			<form action="#" th:action="@{/viewEmploye}" th:object="${employe}" method="post">
@@ -25,8 +27,6 @@
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="js/PHP-Contact-Form-dark.js"></script>
-	<script src="js/PHP-Contact-Form-dark1.js"></script>
 	<script src="js/Table-with-search.js"></script>
 </body>
 

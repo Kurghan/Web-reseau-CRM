@@ -6,5 +6,5 @@ import org.springframework.ui.Model;
 @Service
 public interface IServiceSessionUser {
 
-	public void getSessionUser(Model model);
+	public Object getSessionUser(Model model);
 }

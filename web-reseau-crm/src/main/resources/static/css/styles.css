@@ -282,3 +282,20 @@ img {
 	text-shadow: 0.05em 0.05em rgba(0, 0, 0, 0.4);
 	font-weight: 700;
 }
+
+.flag{
+	margin-left : 5px;
+}
+
+.btnView{
+	margin-left: 28%;
+}
+
+.titleCustomer,.titleEmploye{
+	text-align: center;
+	margin-top:2%;
+	margin-bottom: 5%;
+}
+
+
+

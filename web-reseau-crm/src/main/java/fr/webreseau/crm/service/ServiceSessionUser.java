@@ -22,22 +22,26 @@ public class ServiceSessionUser implements IServiceSessionUser{
 	private IServiceCustomer serviceCustomer;
 	
 	
-	public void getSessionUser(Model model) {
+	public Object getSessionUser(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mail = authentication.getName();
 		ArrayList<Employe> listEmploye = serviceEmploye.readEmploye();
 		ArrayList<Customer> listCustomers = serviceCustomer.readCustomers();
+		Object user = null;
 		for(Employe e : listEmploye) {
 			if(e.getMail().equals(mail)) {
 				model.addAttribute("sessionUser" , e);
+				user = e;
 			}
 		}
 		
 		for(Customer c : listCustomers) {
 			if(c.getMail().equals(mail)) {
 				model.addAttribute("sessionUser", c);
+				user = c;
 			}
 		}
+		return user;
 	}
 
 }

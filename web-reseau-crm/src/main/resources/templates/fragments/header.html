@@ -3,6 +3,7 @@
 
 <head th:fragment="head">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
     <title>Web-reseau</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="fonts/font-awesome.min.css"/>
@@ -10,10 +11,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"/>
     <link rel="stylesheet" href="css/Pretty-Header.css"/>
     <link rel="stylesheet" href="css/styles.css"/>
-    <link rel="stylesheet" href="css/circle-progress-bar.css"/>
     <link rel="stylesheet" href="css/MUSA_no-more-tables.css"/>
     <link rel="stylesheet" href="css/MUSA_no-more-tables1.css"/>
-
 </head>
 
 <body>
@@ -21,23 +20,43 @@
         <div class="container-fluid">
             <div class="navbar-header"><a class="navbar-brand" href="/"> </a><button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
             <div class="collapse navbar-collapse" id="navbar-collapse" th:object="${sessionUser}">
+            <div class="row">
+            <div class="col-lg-4">
                 <ul class="nav navbar-nav links">
-                    <li role="presentation"><a href="customers" th:if="${sessionUser?.role} == 'ADMIN' ">Customers </a></li>
-                    <li role="presentation"><a href="employes" th:if="${sessionUser?.role} == 'ADMIN' ">Employes </a></li>
-                    <li role="presentation"><a href="projects">Projects </a></li>
-                    <li role="presentation"><a href="/listMail">Mail </a></li>
-                    <li role="presentation"><a href="/" th:if="${sessionUser?.role} == 'ADMIN' ">Files </a></li>
+                    <li role="presentation"><a href="customers" th:if="${sessionUser?.role} == 'ADMIN' " th:text="#{nav.customers}">Customers </a></li>
+                    <li role="presentation"><a href="employes" th:if="${sessionUser?.role} == 'ADMIN' " th:text="#{nav.employes}">Employes </a></li>
+                    <li role="presentation"><a href="projects" th:text="#{nav.projects}">Projects </a></li>
+                    <li role="presentation"><a href="listMail" th:text="#{nav.mails}">Mails </a></li>
+                    <li role="presentation"><a href="files" th:if="${sessionUser?.role} == 'ADMIN' " th:text="#{nav.files}">Files </a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right"></ul>
-                <a th:inline="text" class="pull-right" th:text="${sessionUser?.name} + ',' + ${sessionUser?.firstName}"></a><br></br>
-                <form class="btn pull-right" th:action="@{/logout}">
-                	<input type="submit" value="Logout"/>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                <div class="col-12 col-md-offset-9">
+                <div th:inline="text" class="row loggedUser" th:text="${sessionUser?.name} + ',' + ${sessionUser?.firstName}"></div>
+                </div>
+                <div class=" row locales">
+                	<div class="col-sm-12 col-md-offset-11">
+					<select id="locales">
+						<option value="">Langue</option>
+	    				<option value="en" th:text="#{lang.eng}"></option>
+	    				<option value="fr" th:text="#{lang.fr}"></option>
+					</select>
+					</div>
+				</div>
+				<div class="row logout">
+                <form class="col-md-12 col-lg-offset-9" th:action="@{/logout}">
+                	<input class="button" type="submit" value="Logout"/>
                 </form>
+                </div>
+                </div>
+                </div>
         </div>
         </div>
+        <script src="js/jquery.min.js"></script>
+        <script type="application/json"  src="../../static/js/Table-with-search.js"></script>
+    	<script src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/lang.js"></script>
     </nav>
-    <script src="../../static/js/jquery.min.js"></script>
-    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

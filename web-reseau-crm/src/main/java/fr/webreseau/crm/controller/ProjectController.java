@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.webreseau.crm.model.Project;
 import fr.webreseau.crm.model.ProjectTask;
@@ -52,15 +52,22 @@ public class ProjectController {
 		return "projects/projects";
 
 	}
-
+	
+	@RequestMapping("/viewProjectID")
+	public String pageViewProjectID(@Valid Long ID ,RedirectAttributes ra) {
+		ra.addAttribute("ID",ID);
+		return "redirect:/viewProject";
+		
+	}
+	
 	// page de vue d'un projet
-	@RequestMapping("/viewProject")
-	public String pageViewProject(@RequestParam(value = "ID") Long ID, Model model) {
+	@RequestMapping(value ="/viewProject")
+	public String pageViewProject(@Valid Long ID,Model model) {
 		serviceSessionUser.getSessionUser(model);
 		ArrayList<Project> listProject = service.readProject();
 		ArrayList<ProjectTask> listTask = serviceTask.readTasks();
 		for (Project p : listProject) {
-			if (ID == p.getID()) {
+			if (ID == p.getID() && ID != null) {
 				model.addAttribute("project", p);
 			}
 		}
@@ -79,6 +86,7 @@ public class ProjectController {
 		return "projects/viewProject";
 	}
 
+
 	@RequestMapping("/projectAdd")
 	public String pageProjectAdd(@Valid Project project) {
 		service.creatProject(project);
@@ -93,52 +101,4 @@ public class ProjectController {
 		return "forward:/viewProject";
 	}
 
-	/*public void progressBarProject(Long ID , Model model) {
-		Project project = service.readOneProject(ID);
-		Date startDate = project.getStartDate();
-		Date deadLine = project.getDeadLine();
-		final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-		Long delta =deadLine.getTime() - startDate.getTime();
-		Long rest = ((delta / MILLISECONDS_PER_DAY));
-		System.out.println(rest);
-		Long dayD =new Date().getTime();
-		Long dayRest = dayD - rest;
-		System.out.println(dayRest);
-	}*/
-	
-	
-/*	//recuperation du nombre de jour restant avant la fin du projet
-	public void dayRest(Long ID , Model model) {
-		Project project = service.readOneProject(ID);
-		final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24; 
-		Long delta =  project.getDeadLine().getTime() - project.getStartDate().getTime();
-		Long nbDaysTotal = delta / (MILLISECONDS_PER_DAY);
-		long dDay = new Date().getTime(); 
-		Long delatNbRest = project.getDeadLine().getTime() - dDay;
-		Long nbRest = delatNbRest / (MILLISECONDS_PER_DAY);
-		Long percent = (nbRest*100)/nbDaysTotal;
-		Long percentRest = 100 - percent;
-		model.addAttribute("percentRest",percentRest);
-		if(nbRest > 0) {
-		model.addAttribute("nbRest",nbRest);}
-		else {
-			nbRest = (long) 0;
-			model.addAttribute("nbRest",nbRest);
-		}
-	}
-	
-	//avancement des taches '%'
-	public void percentTask(Long ID , Model model) {
-		ArrayList<ProjectTask> listTasks = serviceTask.listProjectTasksById(ID);
-		int compteur = 0;
-		int percentTask = 0;
-		for (ProjectTask p : listTasks) {
-			percentTask = percentTask + p.getProgress();
-			compteur ++;
-		}
-		double decPercent = ((double)percentTask/100)/compteur;
-		//System.out.println(decPercent);
-		String nbPercent = String.valueOf(decPercent);
-		model.addAttribute("nbPercent",nbPercent);
-	}*/
 }

@@ -10,22 +10,20 @@
     <div class="" th:fragment="tableEmployes">
     <div class="row">
         <div class="col-md-12">
-        
         </div>
         <div id="no-more-tables">
             <table class="col-md-12 table-bordered table-striped table-condensed cf results">
             <thead>
 					<tr>
 						<th id="IDEmploye">ID</th>
-						<th >Name</th>
-						<th >Firstname</th>
-						<th >Fonction</th>
-						<th >Address</th>
-						<th >city</th>
-						<th >Country</th>
-						<th >Téléphone</th>
-						<th >Mail</th>
-						<th >Edit</th>
+						<th th:text="#{employe.name}">Name</th>
+						<th th:text="#{employe.firstname}">Firstname</th>
+						<th th:text="#{employe.fonction}">Fonction</th>
+						<th th:text="#{employe.adress}">Address</th>
+						<th th:text="#{employe.city}">city</th>
+						<th th:text="#{employe.country}">Country</th>
+						<th th:text="#{employe.phone}">Téléphone</th>
+						<th th:text="#{employe.mail}">Mail</th>
 					</tr>
 					<tr class="warning no-result">
 						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -42,15 +40,15 @@
 						<th th:text="${employe.country}"></th>
 						<th th:text="${employe.phone}"></th>
 						<th th:text="${employe.mail}" id="mail"></th>
-						<th ><button type="submit" th:value="${employe.ID}" name="ID" class="button">View</button></th>
+						<th ><input type="image" src="img/oeil2.png" th:value="${employe.ID}" name="ID" class="button btnView"/></th>
 					</tr>
 				</tbody>
             </table>
         </div>
     </div>
 </div>
-    <script src="../../static/js/jquery.min.js"></script>
-    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

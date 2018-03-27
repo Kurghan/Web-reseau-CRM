@@ -3,6 +3,7 @@
 
 <head th:fragment="tableCustomer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
     <title>table</title>
 </head>
 
@@ -17,15 +18,15 @@
             				<thead>
 					<tr>
 						<th id="IDCustomer">ID</th>
-						<th >Name</th>
-						<th >Firstname</th>
-						<th >Company Name</th>
-						<th >Address</th>
-						<th >city</th>
-						<th >Country</th>
-						<th >Téléphone</th>
-						<th >Mail</th>
-						<th >n°Siret</th>
+						<th th:text="#{customer.name}">Name</th>
+						<th th:text="#{customers.firstName}">Firstname</th>
+						<th th:text="#{customers.CompanyName}">Company Name</th>
+						<th th:text="#{customers.adresse}">Address</th>
+						<th th:text="#{customers.city}">city</th>
+						<th th:text="#{customers.country}">Country</th>
+						<th th:text="#{customers.phone}">Téléphone</th>
+						<th th:text="#{customers.mail}">Mail</th>
+						<th th:text="#{customers.siret}">n°Siret</th>
 						<th ></th>
 					</tr>
 					<tr class="warning no-result">
@@ -44,7 +45,7 @@
 						<th th:text="${customer.phone}"></th>
 						<th th:text="${customer.mail}"></th>
 						<th th:text="${customer.nSiret}"></th>
-						<th class="col-md-1 col-xs-12"><button type="submit" th:value="${customer.ID}" name="ID" class="button">View</button></th>
+						<th class="col-md-1 col-xs-12"><input type="image" src="img/oeil2.png" th:value="${customer.ID}" name="ID" class="button btnView"/></th>
 					</tr>
 				</tbody>
             

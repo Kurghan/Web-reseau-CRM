@@ -7,19 +7,20 @@
 <div th:replace="fragments/header :: header"></div>
     <div id="contact">
         <div class="container">
-            <div class="intro">
-                <h2>New customers</h2>
-                
+            <div class="row">
+            	<div class="col-lg-12 titleEmploye">
+                <h2 th:text="#{employe.title}">New customers</h2>
+                </div>
             </div>
             <form action="#" th:action="@{/employeAdd}" th:object="${employe}" method="post" id="contact-form">
                 <div class="controls">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group"><label class="control-label">Name </label><input class="form-control" type="text" name="name" />
+                            <div class="form-group"><label class="control-label" th:text="#{employe.name}">Name </label><input class="form-control" type="text" name="name" />
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group"><label class="control-label">FirstName </label><input class="form-control" type="text" name="firstName" />
+                        <div class="form-group"><label class="control-label" th:text="#{employe.firstName}">FirstName </label><input class="form-control" type="text" name="firstName" />
                     </div>
                 </div>
         </div>
@@ -27,11 +28,11 @@
     <div class="controls">
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group"><label class="control-label" >Fonction</label><input class="form-control" type="text" name="fonction" />
+                <div class="form-group"><label class="control-label" th:text="#{employe.fonction}">Fonction</label><input class="form-control" type="text" name="fonction" />
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group"><label class="control-label" >address </label><input class="form-control" type="text" name="address" />
+            <div class="form-group"><label class="control-label" th:text="#{employe.address}">address </label><input class="form-control" type="text" name="address" />
         </div>
     </div>
     </div>
@@ -39,11 +40,11 @@
     <div class="controls">
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group"><label class="control-label">city </label><input class="form-control" type="text" name="city" />
+                <div class="form-group"><label class="control-label" th:text="#{employe.city}">city </label><input class="form-control" type="text" name="city" />
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group"><label class="control-label">Country </label><input class="form-control" type="text" name="country" />
+                <div class="form-group"><label class="control-label" th:text="#{employe.country}">Country </label><input class="form-control" type="text" name="country" />
             </div>
         </div>
     </div>
@@ -51,16 +52,16 @@
     <div class="controls">
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group"><label class="control-label" >Telephone </label><input class="form-control" type="text" name="phone" />
+                <div class="form-group"><label class="control-label" th:text="#{employe.phone}">Telephone </label><input class="form-control" type="text" name="phone" />
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group"><label class="control-label">mail </label><input class="form-control" type="text" name="mail"  />
+                <div class="form-group"><label class="control-label" th:text="#{employe.mail}">mail </label><input class="form-control" type="text" name="mail"  />
             </div>
         </div>
     </div>
     </div>
-    <button class="btnAdd" type="submit">add</button>
+    <button class="btnAdd" type="submit" th:text="#{employe.add}">add</button>
     </form>
     </div>
     </div>

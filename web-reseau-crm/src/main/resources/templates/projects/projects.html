@@ -11,20 +11,20 @@
 	<div th:replace="fragments/header :: header"></div>
 	<div class="container">
 		<div class="intro">
-			<h2 id="title">Projects</h2>
-			<div class="form-group" id="find">
+			<h2 id="title" th:text="#{project.title}">Projects</h2>
+			<div class="row form-group">
+				<div class="col-xs-12 col-sm-4 col-lg-2 pull-right">
 				<input type="text" class="search form-control"
-					placeholder="What you looking for?" />
+					th:placeholder="#{placeholder}" />
+				</div>
 			</div>
 			<span class="counter pull-right"></span>
-			<form action="#" th:action="@{/viewProject}" th:object="${project}" method="post">
+			<form action="#" th:action="@{/viewProjectID}" th:object="${project}" method="post">
 			<div th:replace="fragments/tableProjects :: tableProjects"></div>
 			</form>
 		</div>
 	</div>
-	<script src="js/jquery.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="js/Table-with-search.js"></script>
+	<script type="application/json"  src="../../static/js/Table-with-search.js"></script>
 </body>
 
 </html>

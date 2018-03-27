@@ -31,14 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 		.authorizeRequests()
         .antMatchers(
-                "/bootstrap/**",
-                "/css/**",
-                "/img/**",
-                "/fonts/**",
-                "/js/**").permitAll()
-					        .anyRequest()
-					        		.authenticated()
-					        			.and()
+        		"/css/**",
+        		"/bootstrap/**",
+        		"/img/**",
+        		"/fonts/**"
+        		).permitAll()
+					   .and()
 		.csrf().disable()
 			.authorizeRequests()
 				.anyRequest()

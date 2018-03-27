@@ -15,12 +15,11 @@
             <table class="col-md-12 table-bordered table-striped table-condensed cf results">
 				<thead th:if="${sessionUser?.role} == 'ADMIN' ">
 					<tr>
-						<th >Customer</th>
-						<th >Project Name </th>
-						<th >Description</th>
-						<th >Start date</th>
-						<th >End date</th>
-						<th >View</th>
+						<th th:text="#{project.customer}">Customer</th>
+						<th th:text="#{project.name}">Project Name </th>
+						<th th:text="#{project.description}">Description</th>
+						<th th:text="#{project.startDate}">Start date</th>
+						<th th:text="#{project.deadLine}">End date</th>
 					</tr>
 					<tr class="warning no-result">
 						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -33,19 +32,19 @@
 						<th th:text="${#strings.abbreviate(project.description,50)}"></th>
 						<th th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}"></th>
 						<th th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}"></th>
-						<th ><button type="submit" th:value="${project.ID}" name="ID" class="button">View</button></th>
+						<th ><input type="image" src="img/oeil2.png" th:value="${project.ID}" name="ID" class="button btnView"/></th>
 					</tr>
 				</tbody>
 			</table>
 			<table class="col-md-12 table-bordered table-striped table-condensed cf results">
 				<thead th:if="${sessionUser?.role} == 'USER' ">
 					<tr>
-						<th >Customer</th>
-						<th >Project Name </th>
-						<th >Description</th>
-						<th >Start date</th>
-						<th >End date</th>
-						<th >View</th>
+						<th th:text="#{project.customer}">Customer</th>
+						<th th:text="#{project.name}">Project Name </th>
+						<th th:text="#{project.description}">Description</th>
+						<th th:text="#{project.startDate}">Start date</th>
+						<th th:text="#{project.deadLine}">End date</th>
+						<th th:text="#{project.view}">View</th>
 					</tr>
 					<tr class="warning no-result">
 						<td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -58,15 +57,16 @@
 						<th th:text="${#strings.abbreviate(project.description,50)}"></th>
 						<th th:text="${#dates.format(project.startDate, 'dd-MMM-yyyy')}"></th>
 						<th th:text="${#dates.format(project.deadLine, 'dd-MMM-yyyy')}"></th>
-						<th ><button type="submit" th:value="${project.ID}" name="ID" class="button">View</button></th>
+						<th ><input type="submit" class="button" th:text="#{project.view}"/></th>
 					</tr>
 				</tbody>
 			</table>
         </div>
     </div>
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/Table-with-search.js"></script>
 </div>
-    <script src="../../static/js/jquery.min.js"></script>
-    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -8,9 +8,12 @@
 		<h1 id="title">messages</h1>
 		<div class="container">
 			<div class="intro">
-				<div class="form-group" id="find">
-					<input type="text" class="search form-control" placeholder="What you looking for?" />
+			<div class="row form-group">
+				<div class="col-xs-12 col-sm-4 col-lg-2 pull-right">
+				<input type="text" class="search form-control"
+					th:placeholder="#{placeholder}" />
 				</div>
+			</div>
 				<form action="#" th:action="@{/openMessage}" name="action">
 					<table class="table table-hover table-bordered results"	id="messageTable">
 						<thead>
