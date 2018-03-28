@@ -297,5 +297,13 @@ img {
 	margin-bottom: 5%;
 }
 
-
+.btnLogout{
+	width: 50px;
+	height: 20px;
+	font-size: 9px;
+	padding: 0;
+}
+.loggedUser{
+margin-left:0;	
+}
 
