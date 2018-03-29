@@ -37,7 +37,7 @@
                 <div class=" row locales">
                 	<div class="col-sm-12 col-md-offset-11">
 					<select id="locales">
-						<option value="" th:text="#{lang.choice}">Langue</option>
+						<option value="">Langue</option>
 	    				<option value="en" th:text="#{lang.eng}"></option>
 	    				<option value="fr" th:text="#{lang.fr}"></option>
 					</select>
@@ -45,7 +45,7 @@
 				</div>
 				<div class="row logout">
                 <form class="col-md-12 col-lg-offset-9" th:action="@{/logout}">
-                	<input class="btn btnLogout" type="submit" value="Logout"/>
+                	<input class="button" type="submit" value="Logout"/>
                 </form>
                 </div>
                 </div>
