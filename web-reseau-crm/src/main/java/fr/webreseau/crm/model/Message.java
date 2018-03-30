@@ -23,14 +23,14 @@ public class Message {
 	private Boolean read;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
-	private Customer customer;
+	private Person sender;
 	private Project project;
 	private Long messageSources;
 	private int nbReply;
 	
 
 	
-	public Message(Long iDMessage, String title, String messageContent, Boolean read, Date date, Customer customer,
+	public Message(Long iDMessage, String title, String messageContent, Boolean read, Date date, Person sender,
 			Project project, Long messageSources , int nbReply) {
 		super();
 		IDMessage = iDMessage;
@@ -38,7 +38,7 @@ public class Message {
 		this.messageContent = messageContent;
 		this.read = read;
 		this.date = date;
-		this.customer = customer;
+		this.sender = sender;
 		this.project = project;
 		this.messageSources = messageSources;
 		this.nbReply = nbReply;
@@ -94,13 +94,13 @@ public class Message {
 	}
 
 	@ManyToOne
-    @JoinColumn(name="IDPerson")
-	public Customer getCustomer() {
-		return customer;
+	@JoinColumn(name="IDPerson")
+	public Person getIdSender() {
+		return sender;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setIdSender(Person sender) {
+		this.sender = sender;
 	}
 
 	@ManyToOne
@@ -134,7 +134,7 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [IDMessage=" + IDMessage + ", title=" + title + ", messageContent=" + messageContent + ", read="
-				+ read + ", date=" + date + ", customer=" + customer + ", project=" + project + ", messageSources=" + messageSources + "]";
+				+ read + ", date=" + date + ", sender=" + sender + ", project=" + project + ", messageSources=" + messageSources + "]";
 	}
 	
 }

@@ -8,9 +8,15 @@
 	<div th:replace="fragments/header :: header"></div>
 	<div class="container">
 		<div class="intro">
+		<form action="#" th:action="@{/editMessage}" method="post">
+				<div class="col message_mail_project_name">
+					<span th:text="${message.project.name}"></span>
+				</div>
+				<input type="hidden" name="IDMessage" th:value="${message.IDMessage}" />
 			<div class="message_mail_title">
-				<span th:text="${message.title}">title</span>
+				<span th:text="${message.title}"  th:value="title">title</span>
 			</div>
+			<span  class="dateMessageViewMail" th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}" ></span>
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10">
 					<div class="row message_mail_messageContent">
@@ -18,36 +24,39 @@
 					</div>
 				</div>
 			</div>
+			<input th:if="${sessionUser?.mail} == ${message.IdSender.mail} and ${sessionUser.role} == 'ADMIN'" type="submit" class="btn btn-editMessage" value="Edit"/>
 			<div class="row">
 				<div class="col message_mail_customer_name">
-					<span th:text="${message.customer.name}"></span> <span
-						th:text="${message.customer.firstName}"></span>
-				</div>
-				<div class="col message_mail_project_name">
-					<span th:text="${message.project.name}"></span>
+					<span th:text="${message?.IdSender.name}"></span> <span
+						th:text="${message?.IdSender.firstName}"></span>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 	<div class="btnSendNewMail">
 		<div th:replace="fragments/modalReply :: modalReply"></div>
+		<input type="button" class="btn" onclick="javascript:history.back()" value="back"/>
 		<input class="btn" type="submit" value="Reply" data-toggle="modal" data-target="#myModalReply" />
 	</div>
+	<h2 class="mailReply">Reponses</h2>
 	<div class="row" ID="listReply">
 		<form action="#" th:action="@{/openMessage}" name="action">
-			<table class="table table-hover table-bordered results tableReply" id="messageTable">
+			<table class="col-md-12 table-bordered table-striped table-condensed cf results tableMail-reply" id="messageTable">
 				<thead>
 					<tr>
-						<th class="col-md-1 col-xs-1">date</th>
-						<th class="col-md-4 col-xs-4">message</th>
-						<th class="col-md-1 col-xs-1">read</th>
+						<th >date</th>
+						<th th:text="sendBy">send by </th>
+						<th >message</th>
+						<th >read</th>
 					</tr>
 				</thead>
 				<tbody th:each="message : ${messagesReply}"	th:onclick="'javascript:openMessage(' + ${message?.iDMessage}+ ')'">
 					<tr>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
-						<th class="col-md-4 col-xs-4 tableInfo"	th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
+						<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
+						<th th:text="${message?.IdSender.name}"></th>
+						<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
+						<th th:switch="${message?.read}"><span th:case="false" th:text="no"></span><span th:case="true" th:text="yes"></span></th>
 					</tr>
 				</tbody>
 			</table>

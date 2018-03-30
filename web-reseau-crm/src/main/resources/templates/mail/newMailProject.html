@@ -19,7 +19,7 @@
 					<div class="col-md-offset-1 col-md-10">
 						<div class="row message_mail_messageContent">
 							<span>message</span>
-							<textarea class="form-control textNewMail" rows="9" cols="120"
+							<textarea class="form-control textNewMail" rows="8" cols="120"
 								name="messageContent"></textarea>
 						</div>
 					</div>
@@ -32,10 +32,11 @@
 						<span></span>
 					</div>
 					<div class="btnSendNewMail">
+					<input type="button" class="btn" onclick="javascript:history.back()" value="back"/>
 						<input class="btn" type="submit" value="Send" />
 					</div>
-					<input type="hidden" th:value="${project.customer.ID}" name="customer"/>
-					<input type="hidden" th:value="${project.ID}" name="project"/>
+					<input type="hidden" th:value="${sessionUser.ID}" name="IdSender"/>
+					<input type="hidden" th:value="${project?.ID}" name="project"/>
 				</div>
 			</form>
 		</div>

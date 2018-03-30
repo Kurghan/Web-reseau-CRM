@@ -15,12 +15,12 @@ function viewTab(){
 	var val;
 	try {
 	val=tab.rows[1].cells[0].innerHTML;
-	//alert("plein");
+	document.getElementById("listReply").style.display="block";
 	}
 	catch(error) {
-		//alert("vide");
-		document.getElementById("listReply").style.display="none";
+		//document.getElementById("listReply").style.display="none";
 	}
 	
 	
 }
+

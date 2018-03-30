@@ -95,7 +95,8 @@ public class CustomerController {
 
 	//enregistrement de l'edition d'un client
 	@RequestMapping("/customerModify")
-	public String modifyCustomer(@Valid Customer customer) {
+	public String modifyCustomer(@Valid Customer customer,Model model) {
+		serviceSessionUser.getSessionUser(model);
 		customer.setRole("USER");
 		service.modifyCustomer(customer);
 		return "customers/viewCustomer";

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8" />
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+<form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" /><br/><br/>
+    <input class="btn" type="submit" value="save" />
+    
+<table class="col-md-12 table-bordered table-striped table-condensed cf results">
+            	<thead>
+					<tr>
+						<th id="IDCustomer">ID</th>
+						<th ></th>
+					</tr>
+				</thead>
+				<tbody th:each="file : ${listFiles}">
+					<tr>
+						<th th:text="${file}"></th>
+					</tr>
+				</tbody>
+            
+            
+            </table>
+</form>
+</body>
+</html>

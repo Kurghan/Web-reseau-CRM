@@ -14,6 +14,9 @@
 					th:placeholder="#{placeholder}" />
 				</div>
 			</div>
+			<form action="#" th:action="@{/creatMessage}">
+			<input type="submit" class="btn btn-newMessage" value="new message"/>
+			</form>
 				<form action="#" th:action="@{/openMessage}" name="action">
 				<div th:replace="fragments/tableMessages :: tableMessages"></div>
 					<input type="hidden" ID="ID" name="ID"/>

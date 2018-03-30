@@ -33,6 +33,7 @@ public class MessageController {
 	@Autowired
 	private IServiceProject serviceProject;
 	
+	
 	@Autowired
 	private IServiceSessionUser serviceSessionUser;
 
@@ -49,11 +50,12 @@ public class MessageController {
 			}
 		}
 		for(Message m : listMessagesSource) {
-			if(m.getCustomer().getMail().equals(principal.getName())){
+			if(m.getProject().getCustomer().getMail().equals(principal.getName())){
 				listMessagesSourceUser.add(m);
 				Collections.reverse(listMessagesSourceUser);
 				model.addAttribute("messagesUser", listMessagesSourceUser);
 			}
+
 		}
 		Collections.reverse(listMessagesSource);
 		model.addAttribute("messages",listMessagesSource);
@@ -83,7 +85,7 @@ public class MessageController {
 		ArrayList<Message> listMessage = serviceMessage.readMessage();
 		ArrayList<Message> messagesOfProject = new ArrayList<Message>();
 		for (Message m : listMessage) {
-			if (m.getCustomer() == message.getCustomer() && m.getProject() == message.getProject()) {
+			if (m.getProject().getCustomer() == message.getProject().getCustomer() && m.getProject() == message.getProject()) {
 				messagesOfProject.add(m);
 			}
 		}
@@ -144,5 +146,22 @@ public class MessageController {
 		else serviceMessage.creatMessage(message);
 		return "mail/mail";
 		
+	}
+	
+	//edition d'un message
+	@RequestMapping("/editMessage")
+	public String editMessage(@RequestParam("IDMessage") Long ID,Model model) {
+		serviceSessionUser.getSessionUser(model);
+		Message message = serviceMessage.readOneMessage(ID);
+		model.addAttribute("message",message);
+		return "mail/editMail";
+	}
+	
+	@RequestMapping("/messageEdit")
+	public String messageEdited(@RequestParam("messageContent") String messageContent ,@RequestParam("idMessage")Long ID, Model model) {
+		Message message = serviceMessage.readOneMessage(ID);
+		message.setMessageContent(messageContent);
+		serviceMessage.creatMessage(message);
+		return "forward:listMail";
 	}
 }

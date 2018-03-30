@@ -87,7 +87,8 @@ public class EmployeController {
 	}
 	
 	@RequestMapping("/employeModify")
-	public String modifyEmploye(@Valid Employe employe) {
+	public String modifyEmploye(@Valid Employe employe,Model model) {
+		serviceSessionUser.getSessionUser(model);
 		service.modifyEmploye(employe);
 		return "employes/viewEmploye";
 	}

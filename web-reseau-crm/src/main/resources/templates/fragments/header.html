@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8"/>
     <title>Web-reseau</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous"/>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="fonts/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"/>
-    <link rel="stylesheet" href="css/Pretty-Header.css"/>
     <link rel="stylesheet" href="css/styles.css"/>
     <link rel="stylesheet" href="css/MUSA_no-more-tables.css"/>
     <link rel="stylesheet" href="css/MUSA_no-more-tables1.css"/>
@@ -31,21 +31,10 @@
                 </ul>
                 </div>
                 <div class="col-lg-6 col-sm-12">
-                <div class="col-12 col-md-offset-9">
-                <div th:inline="text" class="row loggedUser" th:text="${sessionUser?.name} + ',' + ${sessionUser?.firstName}"></div>
-                </div>
-                <div class=" row locales">
-                	<div class="col-sm-12 col-md-offset-11">
-					<select id="locales">
-						<option value="">Langue</option>
-	    				<option value="en" th:text="#{lang.eng}"></option>
-	    				<option value="fr" th:text="#{lang.fr}"></option>
-					</select>
-					</div>
-				</div>
-				<div class="row logout">
-                <form class="col-md-12 col-lg-offset-9" th:action="@{/logout}">
-                	<input class="button" type="submit" value="Logout"/>
+                <div class="userSession" th:inline="text" th:text="${sessionUser?.firstName} + ' ' + ${sessionUser?.name}"></div>
+				<div class="logout pull-right">
+                <form th:action="@{/logout}">
+                	<button class="btn-logout" value="Logout" type="submit"><i class="fas fa-power-off fa-2x" ></i></button>
                 </form>
                 </div>
                 </div>

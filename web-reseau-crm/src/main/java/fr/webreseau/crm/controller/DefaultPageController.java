@@ -16,7 +16,13 @@ public class DefaultPageController {
 	@GetMapping("/")
 	public String pageWelcome(Model model) {
 		serviceUser.getSessionUser(model);
-		return "redirect:/projects";
+		return "redirect:/index";
+	}
+	
+	@GetMapping("/index")
+	public String PageIndex(Model model) {
+		serviceUser.getSessionUser(model);
+		return "index";
 	}
 
 	@GetMapping("/login")

@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="intro">
 			<h2 id="title" th:text="#{employe.title}">Employes</h2>
-			<div id="addTitle" role="presentation"><a href="addEmploye" th:text="#{employe.add}">Add</a></div>
+			<div id="addTitle" role="presentation"><form action="#" th:action="@{/addEmploye}"><input type="submit" class="btn" th:value="#{employe.add}"/></form></div>
 			<div class="row form-group">
 				<div class="col-xs-12 col-sm-4 col-lg-2 pull-right">
 				<input type="text" class="search form-control"

@@ -2,9 +2,51 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
-	color: #0093d3;
-	background-color: #d2d2d2;
+	color: #326e86;
+	background-color: #fff;
 	padding: 20px 20px;
+}
+
+.custom-header {
+	background: #f8f8f8;
+	padding: 20px 40px;
+	box-sizing: border-box;
+	border: 1px;
+	border-radius: 0;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand
+	{
+	background: url(../img/logo-web-reseau.png) no-repeat;
+	background-size: contain;
+	width: 250px;
+}
+
+.nav {
+	padding-top: 15px;
+}
+
+.navbar-nav>li>a {
+	color: #326e86 !important;
+	font-weight: 550 !important;
+	font-size: 16px !important;
+}
+
+.navbar-nav>li>a:hover {
+	color: #2fc4a3 !important;
+	font-weight: 550 !important;
+	font-size: 16px !important;
+}
+
+.tableMail-reply>tbody>tr:hover,.tableMail>tbody>tr:hover{
+	background-color: #2fc4a3 !important;
+	font-weight: 550 !important;
+	/*font-size: 16px !important;*/
+}
+
+.tableMail-reply{
+	width: 80%;
+	margin-left: 10%;
 }
 
 .addTaskModal, .modalAddTask, .modalAlert, .modalReply, .replyMessage,
@@ -185,7 +227,6 @@ img {
 }
 
 .message_mail_title {
-	text-transform: uppercase;
 	text-align: center;
 	font-size: 25px;
 }
@@ -199,6 +240,7 @@ img {
 	padding: 10px;
 	background: RGBA(255, 255, 255, 0.2);
 	word-wrap: break-word;
+	border: solid;
 }
 
 .message_mail_customer_name {
@@ -206,9 +248,6 @@ img {
 	margin-left: 80%;
 }
 
-/*#lastMessage{
-	margin-left: 50%;
-}*/
 .messages-project {
 	text-align: center;
 }
@@ -283,19 +322,74 @@ img {
 	font-weight: 700;
 }
 
-.flag{
-	margin-left : 5px;
+.flag {
+	margin-left: 5px;
 }
 
-.btnView{
+.btnView {
 	margin-left: 28%;
 }
 
-.titleCustomer,.titleEmploye{
+.titleCustomer, .titleEmploye {
 	text-align: center;
-	margin-top:2%;
+	margin-top: 2%;
 	margin-bottom: 5%;
 }
 
+.userSession {
+	color: #326e86 !important;
+	font-weight: 550 !important;
+	font-size: 16px !important;
+	position:absolute;
+	top: 0;
+	right: 20px;
+	
+}
+.logout{
+	position:absolute;
+	top: 30px;
+	right: 20px;
+	
+}
+.btn-logout{
+	border-radius:50px;
+	border: hidden;
+	color: #326e86 !important;
+	position: absolute;
+	right: 35px;
+}
 
+.mailReply{
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
 
+.message_mail_project_name{
+	text-align: center;
+	font-size: 30px;
+	text-transform: uppercase;
+}
+
+#listReply{
+	display: none;
+}
+
+.btn-newMessage{
+margin-bottom: 10px;	
+}
+
+.btn-editMessage{
+	margin-top: 10px;
+	position: absolute;
+	left: 10%;
+}
+
+.dateMessageViewMail{
+position: absolute;
+right: 10%;	
+}
+
+.textNewMail{
+height: 80%	!important;
+}

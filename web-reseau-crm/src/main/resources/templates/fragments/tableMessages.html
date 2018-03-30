@@ -9,10 +9,8 @@
 <body>
     <div class="" th:fragment="tableMessages">
     <div class="row">
-        <div class="col-md-12">
-        </div>
         <div id="no-more-tables">
-            <table class="col-md-12 table-bordered table-striped table-condensed cf results">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf results tableMail">
             <thead th:if="${sessionUser?.role} == 'ADMIN' ">
 							<tr>
 								<th th:text="#{message.title}" >title </th>
@@ -21,6 +19,7 @@
 								<th th:text="#{message.read}" >Lu </th>
 								<th th:text="#{message.customer}" >Customer </th>
 								<th th:text="#{message.project}" >Project </th>
+								<th th:text="#{message.sendBy}" >send by </th>
 								<th th:text="#{message.reply}" >reply </th>
 							</tr>
 						</thead>
@@ -30,8 +29,9 @@
 								<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
 								<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
 								<th th:switch="${message?.read}"><span th:case="false" th:text="#{asReadNo}"></span><span th:case="true" th:text="#{asReadYes}"></span></th>
-								<th th:text="${message?.customer.name}"></th>
+								<th th:text="${message?.project.customer.name}"></th>
 								<th th:text="${message?.project.name}"></th>
+								<th th:text="${message?.IdSender.name}"></th>
 								<th th:text="${message?.nbReply}"></th>
 								<th style="display : none;"></th>
 							</tr>
@@ -46,6 +46,7 @@
 								<th th:text="#{message.read}" >Lu </th>
 								<th th:text="#{message.customer}" >Customer </th>
 								<th th:text="#{message.project}" >Project </th>
+								<th th:text="#{message.sendBy}" >send by </th>
 								<th th:text="#{message.reply}" >reply </th>
 							</tr>
 						</thead>
@@ -55,8 +56,9 @@
 								<th th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></th>
 								<th th:text="${#strings.abbreviate(message?.messageContent,55)}"></th>
 								<th th:switch="${message?.read}"><span th:case="false" th:text="#{asReadNo}"></span><span th:case="true" th:text="#{asReadYes}"></span></th>
-								<th th:text="${message?.customer.name}"></th>
+								<th th:text="${message?.project.customer.name}"></th>
 								<th th:text="${message?.project.name}"></th>
+								<th th:text="${message?.IdSender.name}"></th>
 								<th th:text="${message?.nbReply}"></th>
 								<th th:text="${message?.iDMessage}" style="display : none;"></th>
 							</tr>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <title>Web-reseau</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"/>
+    <link rel="stylesheet" href="css/Pretty-Header.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="css/MUSA_no-more-tables.css"/>
+    <link rel="stylesheet" href="css/MUSA_no-more-tables1.css"/>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<h1 class="col-sm-12 col-md-offset-5"> Bienvenue </h1>
+	<h2 class="col-sm-12 col-md-offset-5"> choix de langue </h2>
+                <div id="divLang" class=" row locales">
+                	<div class="col-sm-12 col-md-offset-5">
+					<select id="locales">
+						<option value="">Langue</option>
+	    				<option value="en" th:text="#{lang.eng}"></option>
+	    				<option value="fr" th:text="#{lang.fr}"></option>
+					</select>
+					</div>
+				</div>
+        <script src="js/jquery.min.js"></script>
+        <script type="application/json"  src="../../static/js/Table-with-search.js"></script>
+    	<script src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/lang.js"></script>
+</body>
+
+</html>

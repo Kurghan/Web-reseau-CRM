@@ -14,7 +14,7 @@
 	<div class="container">
 		<div class="intro">
 			<h2 id="title" th:text="#{customers}">Customers</h2>
-			<div id="addTitle" role="presentation"><a href="addCustomer" th:text="#{addCustomer}">Add customer</a></div>
+			<div id="addTitle" role="presentation"><form action="#" th:action="@{/addCustomer}"><input type="submit" class="btn" th:value="#{addCustomer}"/></form></div>
 			<div class="row form-group">
 				<div class="col-xs-12 col-sm-4 col-lg-2 pull-right">
 				<input type="text" class="search form-control"

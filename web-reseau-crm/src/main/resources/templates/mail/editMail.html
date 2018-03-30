@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+<meta charset="utf-8" />
+<title>mail</title>
+</head>
+<body onload="viewTab()">
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="intro">
+			<form action="#" th:action="@{/messageEdit}" method="post">
+				<div class="col message_mail_project_name">
+					<span th:text="${message.project.name}"></span>
+					<input type="hidden" th:value="${message.IDMessage}" name="idMessage"/>
+				</div>
+				<div class="message_mail_title">
+					<span th:text="${message.title}" th:value="title">title</span> 
+				</div>
+				<span class="dateMessageViewMail" th:text="${#dates.format(message?.date, 'dd-MMM-yyyy')}"></span> 
+				<div class="row">
+					<div class="col-md-offset-1 col-md-10">
+						<div class="row message_mail_messageContent">
+							<textarea class="form-control textNewMail" th:text="${message.messageContent}" name="messageContent"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col message_mail_customer_name">
+						<span th:text="${message?.IdSender.name}"></span> 
+						<span th:text="${message?.IdSender.firstName}"></span>
+					</div>
+				</div>
+				<div class="btnSendNewMail">
+					<input type="button" class="btn" onclick="javascript:history.back()" value="back" /> 
+					<input class="btn" type="submit" value="edit" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="js/mail.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/Table-with-search.js"></script>
+</body>
+</html>

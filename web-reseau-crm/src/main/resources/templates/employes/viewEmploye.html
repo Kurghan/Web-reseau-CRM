@@ -11,32 +11,32 @@
 	<div th:replace="fragments/header :: header"></div>
 		<h2 id="title" th:object="${employe}"><span  th:text="${employe.name}"></span>  <span th:text="${employe.firstName}"></span></h2>
     	<form action="#" th:action="@{/editEmploye}" th:object="${employe}" method="post">
-        <table class="table table-hover table-bordered results">
+        <table class="col-md-12 table-bordered table-striped table-condensed cf">
 				<thead>
 					<tr>
-						<th class="col-md-1 col-xs-1" id="IDEmploye">ID</th>
-						<th class="col-md-1 col-xs-1">Name</th>
-						<th class="col-md-1 col-xs-1">Firstname</th>
-						<th class="col-md-2 col-xs-2">Address</th>
-						<th class="col-md-1 col-xs-1">city</th>
-						<th class="col-md-1 col-xs-1">Country</th>
-						<th class="col-md-1 col-xs-1">Téléphone</th>
-						<th class="col-md-1 col-xs-1">Mail</th>
-						<th class="col-md-1 col-xs-1">Fonction</th>
+						<th id="IDEmploye">ID</th>
+						<th >Name</th>
+						<th >Firstname</th>
+						<th >Address</th>
+						<th >city</th>
+						<th >Country</th>
+						<th >Téléphone</th>
+						<th >Mail</th>
+						<th >Fonction</th>
 					</tr>
 				</thead>
 				<tbody th:object="${employe}">
 					<tr>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.ID}" id="IDCustomer"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.name}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.firstName}"></th>
-						<th class="col-md-2 col-xs-2 tableInfo"	th:text="${employe.address}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.city}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.country}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"	th:text="${employe.phone}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.mail}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo" th:text="${employe.fonction}"></th>
-						<th class="col-md-1 col-xs-1 tableInfo"><input type="image" src="img/stylo2.png" style="width: 20px;" th:value="${employe.ID}" name="ID" class="button"/></th>
+						<th th:text="${employe.ID}" id="IDCustomer"></th>
+						<th th:text="${employe.name}"></th>
+						<th th:text="${employe.firstName}"></th>
+						<th th:text="${employe.address}"></th>
+						<th th:text="${employe.city}"></th>
+						<th th:text="${employe.country}"></th>
+						<th th:text="${employe.phone}"></th>
+						<th th:text="${employe.mail}"></th>
+						<th th:text="${employe.fonction}"></th>
+						<th ><input type="image" src="img/stylo2.png" style="width: 20px;" th:value="${employe.ID}" name="ID" class="button"/></th>
 					</tr>
 				</tbody>
 			</table>
